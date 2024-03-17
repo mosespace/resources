@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 400">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #030712;
+      }
+
+      .cls-2 {
+        clip-path: url(#clippath);
+      }
+
+      .cls-3 {
+        fill: none;
+      }
+
+      .cls-4 {
+        fill: #fff;
+        font-family: StretchProRegular, 'Stretch Pro';
+        font-size: 374.28px;
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-3" x="0" width="400" height="401"/>
+    </clipPath>
+  </defs>
+  <g class="cls-2">
+    <rect class="cls-1" x="0" width="400" height="401" rx="33.37" ry="33.37"/>
+  </g>
+  <text class="cls-4" transform="translate(16.52 328.82)"><tspan x="0" y="0">R</tspan></text>
+</svg>
