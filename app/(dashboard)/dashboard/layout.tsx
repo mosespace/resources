@@ -28,8 +28,10 @@ export default async function DashboardLayout({
         <Announcement />
         <div className='container flex h-16 items-center justify-between py-4'>
           <MainNav items={dashboardConfig.mainNav} />
-          <div className='space-x-2'>
-            <SearchCommand />
+          <div className='flex space-x-2'>
+            <div className='hidden md:block'>
+              <SearchCommand />
+            </div>
             <UserAccountNav
               user={{
                 name: "Kisakye Moses",

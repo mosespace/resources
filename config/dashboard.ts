@@ -14,19 +14,29 @@ export const dashboardConfig: DashboardConfig = {
   ],
   sidebarNav: [
     {
-      title: "Posts",
-      href: "/dashboard",
+      title: "AI",
+      href: "/dashboard/ai",
+      icon: "media",
+    },
+    {
+      title: "Accessibility",
+      href: "/dashboard/accessibility",
       icon: "post",
     },
     {
-      title: "Billing",
-      href: "/dashboard/billing",
-      icon: "billing",
-    },
-    {
-      title: "Settings",
-      href: "/dashboard/settings",
+      title: "Authentication",
+      href: "/dashboard/authentication",
       icon: "settings",
     },
+    {
+      title: "Background",
+      href: "/dashboard/background",
+      icon: "help",
+    },
+    {
+      title: "Boilerplate",
+      href: "/dashboard/boilerplate",
+      icon: "pizza",
+    },
   ],
-}
+};
