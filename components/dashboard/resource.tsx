@@ -1,8 +1,9 @@
+import { getCurrentUser } from "@/lib/authProvider";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Resource() {
+export default async function Resource() {
   const data = [
     {
       id: "128jm",
@@ -64,7 +65,8 @@ export default function Resource() {
       path: "https://gpt-skeleton.vercel.app/",
     },
   ];
-
+  const user = await getCurrentUser();
+  const firstName = user?.name?.split(" ")[0];
   return (
     <div className='w-full pb-12 lg:pb-24'>
       <div className='container grid items-start gap-6 px-4 lg:px-0'>
@@ -76,9 +78,15 @@ export default function Resource() {
             </span>
           </Link> */}
         </div>
-        <h1 className='text-3xl font-bold tracking-tight'>
-          Welcome to Resources 🫡
-        </h1>
+        {user ? (
+          <h1 className='text-3xl font-bold tracking-tight'>
+            {firstName}, Welcome to Resources 🫡
+          </h1>
+        ) : (
+          <h1 className='text-3xl font-bold tracking-tight'>
+            Welcome to Resources 🫡
+          </h1>
+        )}
         <p className='text-gray-500 dark:text-gray-400'>
           The foundation of your next project. An open source collection of
           quality resources for developers & designers

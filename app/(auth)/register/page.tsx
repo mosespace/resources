@@ -5,13 +5,20 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { UserAuthForm } from "@/components/user-auth-form";
 import Image from "next/image";
+import { getCurrentUser } from "@/lib/authProvider";
+import { redirect } from "next/navigation";
 
 export const metadata = {
-  title: "Create an account | Resource",
+  title: "Create an account | Resource Inc",
   description: "Create an account to get started.",
 };
 
-export default function RegisterPage() {
+export default async function RegisterPage() {
+  const user = await getCurrentUser();
+  // console.log(user);
+  if (user) {
+    return redirect("/dashboard");
+  }
   return (
     <div className='container grid h-screen w-screen flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0'>
       <Link
@@ -23,8 +30,8 @@ export default function RegisterPage() {
       >
         Login
       </Link>
-      <div className='hidden h-full bg-muted lg:block lg:relative bg-green-600 overflow-hidden'>
-        <div className='absolute inset-0 bg-gradient-to-t from-slate-950  to-transparent opacity-80'></div>
+      <div className='hidden h-full bg-muted lg:block lg:relative overflow-hidden'>
+        <div className='absolute inset-0 bg-gradient-to-t from-slate-950  to-transparent opacity-90'></div>
         <Image
           width={1600}
           height={2000}

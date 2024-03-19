@@ -1,28 +1,30 @@
 "use client";
 
 import * as React from "react";
-import { useForm } from 'react-hook-form';
 import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
+import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/components/ui/use-toast";
 import { Icons } from "@/components/icons";
 import { userAuthSchema } from "@/schema/schema";
+import { cn } from "@/lib/utils";
+import { Loader } from "lucide-react";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-type FormData = z.infer<typeof userAuthSchema>;
+type FormData = z.infer<typeof userAuthSchema> & { name: string };
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(userAuthSchema),
@@ -32,14 +34,17 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const searchParams = useSearchParams();
 
   async function onSubmit(data: FormData) {
+    console.log(data);
     setIsLoading(true);
 
-    const signInResult = await signIn("email", {
+    const signInResult = await signIn("resend", {
+      // name: data.name, // Include name in the signIn function call
       email: data.email.toLowerCase(),
       redirect: false,
       callbackUrl: searchParams?.get("from") || "/dashboard",
     });
 
+    reset();
     setIsLoading(false);
 
     if (!signInResult?.ok) {
@@ -60,6 +65,24 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     <div className={cn("grid gap-6", className)} {...props}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className='grid gap-2'>
+          {/* <div className='grid gap-1'>
+            <Label className='sr-only' htmlFor='name'>
+              Name
+            </Label>
+            <Input
+              id='name'
+              placeholder='John Doe'
+              type='text'
+              autoCapitalize='on'
+              autoComplete='off'
+              autoCorrect='off'
+              disabled={isLoading || isGitHubLoading}
+              {...register("name")}
+            />
+            {errors?.name && (
+              <p className='px-1 text-xs text-red-600'>{errors.name.message}</p>
+            )}
+          </div> */}
           <div className='grid gap-1'>
             <Label className='sr-only' htmlFor='email'>
               Email
@@ -80,32 +103,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               </p>
             )}
           </div>
-
-          <div className='grid gap-1'>
-            <Label className='sr-only' htmlFor='password'>
-              Password
-            </Label>
-            <Input
-              id='password'
-              placeholder='********************'
-              type='password'
-              autoCapitalize='none'
-              autoComplete='password'
-              autoCorrect='off'
-              disabled={isLoading || isGitHubLoading}
-              {...register("password")}
-            />
-            {errors?.password && (
-              <p className='px-1 text-xs text-red-600'>
-                {errors.password.message}
-              </p>
-            )}
-          </div>
           <button className={cn(buttonVariants())} disabled={isLoading}>
-            {isLoading && (
-              <Icons.spinner className='mr-2 h-4 w-4 animate-spin' />
-            )}
-            Sign In with credentials
+            {isLoading && <Loader className='mr-2 h-4 w-4 animate-spin' />}
+            Sign In credentials
           </button>
         </div>
       </form>
@@ -129,7 +129,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         disabled={isLoading || isGitHubLoading}
       >
         {isGitHubLoading ? (
-          <Icons.spinner className='mr-2 h-4 w-4 animate-spin' />
+          <Loader className='mr-2 h-4 w-4 animate-spin' />
         ) : (
           <Icons.gitHub className='mr-2 h-4 w-4' />
         )}{" "}

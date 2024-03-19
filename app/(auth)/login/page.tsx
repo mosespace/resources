@@ -1,18 +1,23 @@
 import { buttonVariants } from "@/components/ui/button";
 import { UserAuthForm } from "@/components/user-auth-form";
-// import { getCurrentUser } from "@/lib/authProvider";
+import { getCurrentUser } from "@/lib/authProvider";
 import { cn } from "@/lib/utils";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
+export const metadata = {
+  title: "Log-In | Resource Inc",
+  description: "Log into your account to get started.",
+};
+
 export default async function LoginPage() {
-  //   const user = await getCurrentUser();
-  //   // console.log(user);
-  //   if (user) {
-  //     return redirect("/tasks/dashboard");
-  //   }
+  const user = await getCurrentUser();
+  // console.log(user);
+  if (user) {
+    return redirect("/dashboard");
+  }
   return (
     <div className='container flex h-screen w-screen flex-col items-center justify-center'>
       <Link

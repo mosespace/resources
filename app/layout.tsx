@@ -1,14 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { MainNav } from "@/components/main-nav";
-import { marketingConfig } from "@/config/marketing";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { SiteFooter } from "@/components/site-footer";
-import { buttonVariants } from "@/components/ui/button";
 import { ThemeProvider } from "@/components/theme-provider";
-import GitHubButton from "@/components/github-button";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,10 +22,11 @@ export default function RootLayout({
         <ThemeProvider
           attribute='class'
           defaultTheme='light'
-          // enableSystem
+          enableSystem
           disableTransitionOnChange
         >
           <main>{children}</main>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
