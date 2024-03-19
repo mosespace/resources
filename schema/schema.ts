@@ -52,4 +52,16 @@ export const userAuthSchema = z.object({
   //   }),
 });
 
+export const categorySchema = z.object({
+  name: z
+    .string({
+      required_error: "Name is required",
+    })
+    .min(4, {
+      message: "Name too short - should be 4 chars minimum",
+    }),
+  icon: z.string(),
+  userId: z.string(),
+});
+
 export type Task = z.infer<typeof taskSchema>;

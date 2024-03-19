@@ -20,6 +20,32 @@ export async function getUser(id: any) {
   }
 }
 
+export async function postCategory(data: any) {
+  try {
+    const category = await db.category.create({
+      data,
+    });
+    revalidatePath("/dashboard");
+    console.log("The following category was created:", category);
+    return category;
+  } catch (error: any) {
+    console.log(error);
+  }
+}
+
+export async function getCategories() {
+  try {
+    const categories = await db.category.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+    return categories;
+  } catch (error: any) {
+    console.log(error);
+  }
+}
+
 export async function postResource(data: any) {
   try {
     if (!data) {
@@ -105,6 +131,41 @@ export async function updateResource(id: any, data: any, userId: any) {
   }
 }
 
+// export async function updateCategory(id: any, data: any, userId: any) {
+//   try {
+//     // Retrieve the category from the database using both id and userId
+//     const category = await db.category.findUnique({
+//       where: { id },
+//       select: { userId: true }, // Only select the userId field
+//     });
+
+//     // Check if the category exists
+//     if (!category) {
+//       throw new Error("Task not found");
+//     }
+
+//     // Check if the userId of the category matches the provided userId
+//     if (category.userId !== userId) {
+//       throw new Error("Unauthorized update attempt");
+//     }
+
+//     // If the userId matches, proceed with updating the category
+//     const updateTask = await db.category.update({
+//       where: { id },
+//       data,
+//     });
+
+//     // Perform any necessary post-deletion actions
+//     revalidatePath("/dashboard");
+
+//     console.log(updateTask);
+//     return updateTask;
+//   } catch (error: any) {
+//     console.error("Error updating category:", error);
+//     throw error;
+//   }
+// }
+
 export async function deleteResource(id: any, userId: any) {
   // console.log(id, userId);
   try {
@@ -139,4 +200,3 @@ export async function deleteResource(id: any, userId: any) {
     throw error;
   }
 }
-

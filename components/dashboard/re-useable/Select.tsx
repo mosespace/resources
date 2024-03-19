@@ -9,7 +9,9 @@ import {
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "../../ui/select";
@@ -40,14 +42,20 @@ export default function CustomSelect({
                   <SelectValue placeholder={placeholder} />
                 </SelectTrigger>
               </FormControl>
-
-              <SelectContent>
+              {/* <SelectContent>
                 {selectableContent.map((item: any, id: any) => (
                   <div key={id}>
                     <SelectItem value={item.id}>{item.title}</SelectItem>
                   </div>
                 ))}
-              </SelectContent>
+              </SelectContent> */}
+              <SelectGroup>
+                <SelectContent>
+                  {selectableContent.map((item: any, id: any) => (
+                    <SelectItem value={item.id}>{item.title}</SelectItem>
+                  ))}
+                </SelectContent>
+              </SelectGroup>
             </Select>
           </FormItem>
         )}

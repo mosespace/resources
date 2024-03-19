@@ -61,12 +61,14 @@ export const authOptions: NextAuthOptions = {
           name: token.name,
           email: token.email,
           image: token.picture,
+          role: token.role,
         } as {
           id: string;
           name?: string | null | undefined;
           email?: string | null | undefined;
           image?: string | null | undefined;
           token?: string | null | undefined;
+          role?: string;
         };
       }
       return session;
@@ -92,6 +94,7 @@ export const authOptions: NextAuthOptions = {
         name: dbUser.name,
         email: dbUser.email,
         picture: dbUser.image,
+        role: dbUser.role,
       };
     },
   },

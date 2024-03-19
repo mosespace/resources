@@ -55,22 +55,127 @@ export function CrudOperations({ user, initialData }: any) {
 
   const selectableContent = [
     {
-      id: "html css",
-      title: "Html CSS",
+      id: "1",
+      title: "CMS",
     },
     {
-      id: "react",
-      title: "React",
+      id: "2",
+      title: "Color",
     },
     {
-      id: "vue js",
-      title: "Vue Js",
+      id: "3",
+      title: "Components",
     },
     {
-      id: "python",
-      title: "Python",
+      id: "4",
+      title: "Documentation",
+    },
+    {
+      id: "5",
+      title: "CSS",
+    },
+    {
+      id: "6",
+      title: "Data Visualization",
+    },
+    {
+      id: "7",
+      title: "Database",
+    },
+    {
+      id: "8",
+      title: "Design",
+    },
+    {
+      id: "9",
+      title: "Email",
+    },
+    {
+      id: "10",
+      title: "Fonts",
+    },
+    {
+      id: "11",
+      title: "Frameworks",
+    },
+    {
+      id: "12",
+      title: "Icons",
+    },
+    {
+      id: "13",
+      title: "Illustrations",
+    },
+    {
+      id: "14",
+      title: "Images",
+    },
+    {
+      id: "15",
+      title: "Learning and challenges",
+    },
+    {
+      id: "16",
+      title: "Libraries and Packages",
+    },
+    {
+      id: "18",
+      title: "Open Source",
+    },
+    {
+      id: "19",
+      title: "Performance",
+    },
+    {
+      id: "20",
+      title: "SAAS",
+    },
+    {
+      id: "21",
+      title: "SEO",
+    },
+    {
+      id: "22",
+      title: "Snippets & Hooks",
+    },
+    {
+      id: "23",
+      title: "Social Media",
+    },
+    {
+      id: "24",
+      title: "Typing",
+    },
+    {
+      id: "25",
+      title: "UI/UX",
+    },
+    {
+      id: "26",
+      title: "Video",
+    },
+    {
+      id: "27",
+      title: "Vs Code Extensions",
+    },
+    {
+      id: "28",
+      title: "Web Hosting",
+    },
+    {
+      id: "29",
+      title: "Web3",
+    },
+    {
+      id: "30",
+      title: "Writing",
+    },
+    {
+      id: "31",
+      title: "Youtube Chanel",
     },
   ];
+
   const priorityLevels = [
     {
       id: "easy",
@@ -229,23 +334,19 @@ export function CrudOperations({ user, initialData }: any) {
                       placeholder='eg; resources'
                     />
 
-                    <CustomInput
-                      control={form.control}
-                      name='description'
-                      type='textarea'
-                      label='Description'
-                      placeholder='Resources is the foundation of your next project. An open source collection of quality resource for developers & designers'
-                    />
                     <div className='grid w-full gap-1.5'>
-                      <Label htmlFor='description'>Your Message</Label>
+                      <Label htmlFor='description'>Description</Label>
                       <p className='text-sm text-muted-foreground'>
                         Describe the resource in 2-3 sentences
                       </p>
                       <Textarea
+                        // control={form.control}
                         placeholder='Resources is the foundation of your next project. An open source collection of quality resource for developers & designers'
                         id='description'
+                        name='description'
                       />
                     </div>
+
                     <CustomInput
                       control={form.control}
                       name='url'
@@ -256,47 +357,17 @@ export function CrudOperations({ user, initialData }: any) {
                   </>
                 )}
 
-                {!initialData && (
-                  <>
-                    <CustomSelect
-                      control={form.control}
-                      label='Choose the tech-stack'
-                      name='tech_stack'
-                      placeholder='Select tech stacks'
-                      selectableContent={selectableContent}
-                      description='The filed wont be editable on the edit. chose wisely'
-                    />
-
-                    <CustomSelect
-                      control={form.control}
-                      label='Choose priority level'
-                      name='priority'
-                      placeholder='Select priority'
-                      selectableContent={priorityLevels}
-                      description='The filed wont be editable on the edit. chose wisely'
-                    />
-                  </>
-                )}
+                <CustomSelect
+                  control={form.control}
+                  label='Choose Category'
+                  name='category'
+                  placeholder='Select a category'
+                  selectableContent={selectableContent}
+                  description='This filed is compulsory'
+                />
               </div>
 
               <div>
-                {initialData ? (
-                  <>
-                    <h3 className='mb-4 text-lg font-medium'>
-                      Current progress&nbsp;
-                      <span className='text-green-500'>
-                        {initialData.status}
-                      </span>
-                    </h3>
-                  </>
-                ) : (
-                  <>
-                    <h3 className='mb-4 text-lg font-medium'>
-                      Choose your current process
-                    </h3>
-                  </>
-                )}
-
                 {/* priorities */}
                 {/* <div className='space-y-4'>
                   <FormField

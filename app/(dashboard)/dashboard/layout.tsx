@@ -9,6 +9,7 @@ import Announcement from "@/components/dashboard/announcement";
 import { SearchCommand } from "@/components/dashboard/search-command";
 import { getCurrentUser } from "@/lib/authProvider";
 import { CrudOperations } from "@/components/dashboard/crud-operations";
+import { getCategories } from "@/actions/resources";
 
 interface DashboardLayoutProps {
   children?: React.ReactNode;
@@ -19,6 +20,8 @@ export default async function DashboardLayout({
 }: DashboardLayoutProps) {
   const user = await getCurrentUser();
   // console.log(user);
+  const categories = await getCategories();
+
   if (!user) {
     return notFound();
   }
@@ -46,7 +49,7 @@ export default async function DashboardLayout({
       </header>
       <div className='container grid flex-1 gap-12 md:grid-cols-[200px_1fr]'>
         <aside className='hidden w-[200px] flex-col md:flex'>
-          <DashboardNav items={dashboardConfig.sidebarNav} />
+          <DashboardNav items={categories} user={user} />
         </aside>
         <main className='flex w-full flex-1 flex-col overflow-hidden'>
           {children}
