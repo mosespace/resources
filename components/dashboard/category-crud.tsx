@@ -83,7 +83,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { toast } from "../ui/use-toast";
-import { postCategory } from "@/actions/resources";
+import { postCategory, updateCategory } from "@/actions/resources";
 
 type FormData = z.infer<typeof categorySchema> & { name: string };
 
@@ -278,6 +278,7 @@ export default function CategoryCreate({ initialData, user }: any) {
     defaultValues: {
       name: "",
       icon: "",
+      ...initialData,
     },
   });
 
@@ -286,16 +287,15 @@ export default function CategoryCreate({ initialData, user }: any) {
     setLoading(true);
     try {
       if (initialData) {
-        // console.log(data);
-        setLoading(false);
-        // const update = await updateCategory(initialData?.id, data, userId);
-        // if (update) {
-        //   setLoading(false);
-        //   toast({
-        //     title: "Your category has been updated successfully",
-        //   });
-        //   location.reload();
-        // }
+        setLoading(true);
+        const update = await updateCategory(initialData?.id, data, data.userId);
+        if (update) {
+          setLoading(false);
+          toast({
+            title: "Your category has been updated successfully",
+          });
+          location.reload();
+        }
       } else {
         await postCategory(data);
         toast({

@@ -64,4 +64,10 @@ export const categorySchema = z.object({
   userId: z.string(),
 });
 
+export const DeleteConfirmation = z.object({
+  confirmation: z.string({
+    required_error: "Confirmation is required",
+  }),
+});
+
 export type Task = z.infer<typeof taskSchema>;
