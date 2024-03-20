@@ -5,13 +5,13 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "../../ui/form";
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "../../ui/select";
@@ -24,7 +24,6 @@ export default function CustomSelect({
   selectableContent,
   description,
 }: any) {
-  //   console.log(selectableContent);
   return (
     <div>
       <FormField
@@ -42,21 +41,15 @@ export default function CustomSelect({
                   <SelectValue placeholder={placeholder} />
                 </SelectTrigger>
               </FormControl>
-              {/* <SelectContent>
-                {selectableContent.map((item: any, id: any) => (
-                  <div key={id}>
-                    <SelectItem value={item.id}>{item.title}</SelectItem>
-                  </div>
-                ))}
-              </SelectContent> */}
               <SelectGroup>
                 <SelectContent>
                   {selectableContent.map((item: any, id: any) => (
-                    <SelectItem value={item.id}>{item.title}</SelectItem>
+                    <SelectItem value={item.id}>{item.name}</SelectItem>
                   ))}
                 </SelectContent>
               </SelectGroup>
             </Select>
+            <FormMessage />
           </FormItem>
         )}
       />

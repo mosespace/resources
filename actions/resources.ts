@@ -134,16 +134,30 @@ export async function deleteCategory(id: any) {
 export async function postResource(data: any) {
   try {
     if (!data) {
-      throw new Error("User ID is undefined");
+      throw new Error("Data is undefined");
     }
+
+    // Correctly structure the data for creating a new resource with a relation to a user
     const resource = await db.resource.create({
-      data,
+      data: {
+        name: data.name,
+        description: data.description,
+        url: data.url,
+        category: {
+          connect: { id: data.category },
+        },
+        user: {
+          connect: { id: data.userId },
+        },
+      },
     });
+
     revalidatePath("/dashboard");
-    console.log("The following resource was created:", resource);
+    // console.log("The following resource was created:", resource);
     return resource;
   } catch (error: any) {
     console.log(error);
+    throw error; // It's generally a good idea to re-throw the error or handle it appropriately
   }
 }
 

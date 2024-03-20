@@ -35,7 +35,11 @@ export default async function DashboardLayout({
           <div className='flex space-x-2'>
             <div className='hidden md:flex space-x-2 items-center'>
               <SearchCommand />
-              <CrudOperations user={user} initialData='' />
+              <CrudOperations
+                user={user}
+                initialData=''
+                categories={categories}
+              />
             </div>
             <UserAccountNav
               user={{

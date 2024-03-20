@@ -1,20 +1,19 @@
 import { z } from "zod";
 
 export const FormSchema = z.object({
-  in_progress: z.boolean().default(false).optional(),
   userId: z.string(),
-  canceled: z.boolean().default(false).optional(),
-  todo: z.boolean().default(false).optional(),
-  completed: z.boolean().default(false).optional(),
-  title: z.string().min(8, {
-    message: "Task title must be at least 8 characters.",
+  name: z.string().min(8, {
+    message: "Name must be at least 8 characters long.",
   }),
-  tech_stack: z.string().optional(),
-  priority: z.string().optional(),
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+  category: z.string({
+    required_error: "You need to choose a category",
   }),
-  status: z.string().optional(),
+  url: z.string().url({
+    message: "Not a valid url type",
+  }),
+  description: z.string().min(20, {
+    message: "Description must be at least 20 characters long.",
+  }),
 });
 
 export const taskSchema = z.object({

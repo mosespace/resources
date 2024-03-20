@@ -211,7 +211,7 @@ export function DashboardNav({ items, user }: any) {
           </Link>
         )}
       </span>
-      <ScrollArea className='h-[80%] pr-4 w-[16rem]'>
+      <ScrollArea className='h-[80%] pr-3 w-[14rem]'>
         <nav className='grid items-start gap-2'>
           {items.map((item: any, index: any) => {
             const Icon = iconComponents[item.icon || "arrowRight"];
@@ -237,7 +237,7 @@ export function DashboardNav({ items, user }: any) {
                         <DropdownMenuTrigger asChild>
                           <button
                             type='button'
-                            className='absolutek z-10k right-0k ml-4 opacity-85k hover:opacity-100 bg-gradient-to-l dark:from-slate-800 from-slate-400 to-transparent px-2 py-2 rounded text-white cursor-pointer'
+                            className='ml-4s opacity-85k hover:opacity-100 bg-gradient-to-l dark:from-slate-800 from-slate-400 to-transparent px-2 py-2 rounded text-white cursor-pointer'
                             aria-label='More'
                           >
                             <Ellipsis className='h-4 w-4' />
