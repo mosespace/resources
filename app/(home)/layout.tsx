@@ -6,6 +6,8 @@ import { buttonVariants } from "@/components/ui/button";
 import { MainNav } from "@/components/main-nav";
 import { SiteFooter } from "@/components/site-footer";
 import GitHubButton from "@/components/github-button";
+import { getCurrentUser } from "@/lib/authProvider";
+import { redirect } from "next/navigation";
 
 interface MarketingLayoutProps {
   children: React.ReactNode;
@@ -14,6 +16,11 @@ interface MarketingLayoutProps {
 export default async function MarketingLayout({
   children,
 }: MarketingLayoutProps) {
+  const user = await getCurrentUser();
+
+  if (user) {
+    return redirect("/dashboard");
+  }
   return (
     <div className='flex min-h-screen flex-col dark:bg-slate-950 bg-white'>
       <header className='container z-40 bg-background'>

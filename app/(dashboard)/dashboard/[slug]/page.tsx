@@ -1,5 +1,6 @@
 import { getCategories, getResources } from "@/actions/resources";
 import Resource from "@/components/dashboard/resource";
+import Newsletter from "@/components/newsletter";
 import React from "react";
 
 export default async function page({ params: { slug } }: any) {
@@ -34,29 +35,35 @@ export default async function page({ params: { slug } }: any) {
         data={filteredResources}
         title={`These Are ${filteredCategory?.name} 🎉😲`}
       />
-      <div className='flex items-center justify-center'>
+
+      <div className='flex items-center pb-8 justify-center'>
         {filteredResources?.length === 0 && (
-          <div className='flex max-w-lg flex-row-reverse items-end gap-4'>
-            <img
-              src='/developer.jpg'
-              alt='Kisakye Moses also known as Uncle Moses || mosespace a fullstack developer from Kampala Uganda building SAAS for the future.'
-              className='size-20 rounded-lg object-cover'
-            />
+          <div className='flex flex-col'>
+            <div className='flex max-w-lg flex-row-reverse items-end gap-4'>
+              <img
+                src='/developer.jpg'
+                alt='Kisakye Moses also known as Uncle Moses || mosespace a fullstack developer from Kampala Uganda building SAAS for the future.'
+                className='size-20 rounded-lg object-cover'
+              />
 
-            <div>
-              <h3 className='text-lg/tight font-medium dark:text-orange-500 text-gray-900'>
-                Hi, it seems you wanted {slug} 😢
-              </h3>
+              <div>
+                <h3 className='text-lg/tight font-medium dark:text-orange-500 text-gray-900'>
+                  Hi, it seems you wanted {filteredCategory?.name} 😢
+                </h3>
 
-              <p className='mt-0.5 text-gray-700'>
-                Am currently working alone and so hard to see that this comes to
-                life. give me a few minutes and check back. Everything will be
-                here. Thank you.🫶
-              </p>
+                <p className='mt-0.5 text-gray-700'>
+                  Am currently working alone and so hard to see that this comes
+                  to life. give me a few minutes and check back. Everything will
+                  be here. Thank you.🫶
+                </p>
+              </div>
             </div>
+            {/* <Newsletter /> */}
           </div>
         )}
       </div>
+
+      <Newsletter />
     </div>
   );
 }
