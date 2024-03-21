@@ -7,7 +7,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -69,10 +68,10 @@ import {
   PenLine,
   Hash,
   FolderOpen,
+  TrainFront,
 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { categorySchema } from "@/schema/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
@@ -84,14 +83,29 @@ import {
 } from "../ui/form";
 import { toast } from "../ui/use-toast";
 import { postCategory, updateCategory } from "@/actions/resources";
-
-type FormData = z.infer<typeof categorySchema> & { name: string };
+import { generateSlug } from "@/lib/generateSlug";
 
 const icons = [
   {
     value: "ShoppingBasket",
     label: "ShoppingBasket",
     icon: <ShoppingBasket className='w-5 h-5' />,
+  },
+  {
+    value: "ShoppingBasket",
+    label: "ShoppingBasket",
+    icon: <ChevronLeft className='w-5 h-5' />,
+  },
+
+  {
+    value: "ShoppingBasket",
+    label: "ShoppingBasket",
+    icon: <ChevronRight className='w-5 h-5' />,
+  },
+  {
+    value: "ShoppingBasket",
+    label: "ShoppingBasket",
+    icon: <TrainFront className='w-5 h-5' />,
   },
   {
     value: "SearchCheck",
@@ -271,20 +285,35 @@ const icons = [
   },
 ];
 
+const FormSchema = z.object({
+  name: z.string().min(2, {
+    message: "Username must be at least 2 characters.",
+  }),
+  slug: z.string(),
+  icon: z.string(),
+  userId: z.string(),
+});
+
 export default function CategoryCreate({ initialData, user }: any) {
-  const [loading, setLoading] = React.useState<boolean>(false);
-  const form = useForm<z.infer<typeof categorySchema>>({
-    resolver: zodResolver(categorySchema),
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
     defaultValues: {
       name: "",
+      slug: "",
       icon: "",
+      userId: initialData ? initialData.userId : user?.id,
       ...initialData,
     },
   });
 
-  async function onSubmit(data: FormData) {
-    data.userId = initialData ? initialData.userId : user?.id;
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
     setLoading(true);
+    const slug = generateSlug(data.name);
+    data.slug = slug;
+    data.userId = initialData ? initialData.userId : user?.id;
+
     try {
       if (initialData) {
         setLoading(true);
@@ -305,28 +334,21 @@ export default function CategoryCreate({ initialData, user }: any) {
         location.reload();
       }
     } catch (error: any) {
-      if (error.message === "Unauthorized update attempt") {
-        toast({
-          title: "Error: You are not authorized to update this task",
-        });
-        setLoading(false);
-      } else {
-        toast({ title: "Error might be on your network. Try again " });
-      }
+      toast({ title: "Error might be on your network. Try again " });
     }
   }
 
   return (
     <Form {...form}>
-      <Card className='w-[350px] mx-auto my-20'>
-        <CardHeader>
-          <CardTitle>Create category</CardTitle>
-          <CardDescription>
-            Deploy your new project in one-click.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <Card className='w-[350px] mx-auto my-20'>
+          <CardHeader>
+            <CardTitle>Create category</CardTitle>
+            <CardDescription>
+              Create a new category in one-click.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
             <div className='grid w-full items-center gap-4'>
               <FormField
                 control={form.control}
@@ -390,9 +412,9 @@ export default function CategoryCreate({ initialData, user }: any) {
                 </Button>
               )}
             </div>
-          </form>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </form>
     </Form>
   );
 }

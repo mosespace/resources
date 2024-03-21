@@ -2,8 +2,9 @@ import { z } from "zod";
 
 export const FormSchema = z.object({
   userId: z.string(),
-  name: z.string().min(8, {
-    message: "Name must be at least 8 characters long.",
+  slug: z.string(),
+  name: z.string().min(4, {
+    message: "Name must be at least 4 characters long.",
   }),
   category: z.string({
     required_error: "You need to choose a category",

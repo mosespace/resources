@@ -32,6 +32,7 @@ import { useRouter } from "next/navigation";
 import { postResource, updateResource } from "@/actions/resources";
 import { Loader, Plus } from "lucide-react";
 import { getCurrentUser } from "@/lib/authProvider";
+import { generateSlug } from "@/lib/generateSlug";
 
 export function CrudOperations({ user, initialData, categories }: any) {
   // console.log(categories);
@@ -44,6 +45,7 @@ export function CrudOperations({ user, initialData, categories }: any) {
       url: "",
       category: "",
       userId: user?.id,
+      slug: "",
     },
   });
 
@@ -52,32 +54,31 @@ export function CrudOperations({ user, initialData, categories }: any) {
   const [loading, setLoading] = useState(false);
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data);
     setLoading(true);
-
+    const slug = generateSlug(data.name);
+    const updatedData = { ...data, slug };
     data.userId = initialData ? initialData.userId : user?.id;
-
     const sessionUser = await getCurrentUser();
     const userId = (sessionUser as { id: string }).id;
+
     try {
       if (initialData) {
-        // console.log(data);
         setLoading(false);
-        const update = await updateResource(initialData?.id, data, userId);
+        const update = await updateResource(initialData?.id, updatedData);
         if (update) {
           setLoading(false);
           toast({
-            title: "Your task has been updated successfully",
+            title: "Your resource has been updated successfully",
           });
           location.reload();
         }
       } else {
-        await postResource(data);
+        await postResource(updatedData);
         toast({
           title: "Your request has been added captured",
         });
         setLoading(false);
-        // location.reload();
+        location.reload();
       }
     } catch (error: any) {
       if (error.message === "Unauthorized update attempt") {

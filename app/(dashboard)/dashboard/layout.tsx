@@ -9,7 +9,7 @@ import Announcement from "@/components/dashboard/announcement";
 import { SearchCommand } from "@/components/dashboard/search-command";
 import { getCurrentUser } from "@/lib/authProvider";
 import { CrudOperations } from "@/components/dashboard/crud-operations";
-import { getCategories } from "@/actions/resources";
+import { getCategories, getResources } from "@/actions/resources";
 
 interface DashboardLayoutProps {
   children?: React.ReactNode;
@@ -18,9 +18,10 @@ interface DashboardLayoutProps {
 export default async function DashboardLayout({
   children,
 }: DashboardLayoutProps) {
-  const user = await getCurrentUser();
-  // console.log(user);
+  const user: any = await getCurrentUser();
   const categories = await getCategories();
+
+  const resources = await getResources();
 
   if (!user) {
     return notFound();
@@ -46,7 +47,9 @@ export default async function DashboardLayout({
                 name: user?.name,
                 image: user?.image,
                 email: user?.email,
+                role: user?.role,
               }}
+              resources={resources}
             />
           </div>
         </div>

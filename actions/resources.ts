@@ -20,6 +20,20 @@ export async function getUser(id: any) {
   }
 }
 
+export async function getAllAdmins() {
+  try {
+    const admins = await db.user.findMany({
+      where: {
+        role: "ADMIN",
+      },
+    });
+    return admins;
+  } catch (error: any) {
+    console.log(error);
+    throw error; // Ensure errors are propagated for proper error handling
+  }
+}
+
 export async function postCategory(data: any) {
   try {
     const category = await db.category.create({
@@ -143,6 +157,7 @@ export async function postResource(data: any) {
         name: data.name,
         description: data.description,
         url: data.url,
+        slug: data.slug,
         category: {
           connect: { id: data.category },
         },
@@ -195,26 +210,20 @@ export async function findResource(id: any) {
   }
 }
 
-export async function updateResource(id: any, data: any, userId: any) {
+export async function updateResource(id: any, data: any) {
   try {
     // Retrieve the resource from the database using both id and userId
     const resource = await db.resource.findUnique({
       where: { id },
-      select: { userId: true }, // Only select the userId field
     });
 
     // Check if the resource exists
     if (!resource) {
-      throw new Error("Task not found");
+      throw new Error("Resource not found");
     }
 
-    // Check if the userId of the resource matches the provided userId
-    if (resource.userId !== userId) {
-      throw new Error("Unauthorized update attempt");
-    }
-
-    // If the userId matches, proceed with updating the resource
-    const updateTask = await db.resource.update({
+    // If the resource matches, proceed with updating the it
+    const updatedResource = await db.resource.update({
       where: { id },
       data,
     });
@@ -222,8 +231,8 @@ export async function updateResource(id: any, data: any, userId: any) {
     // Perform any necessary post-deletion actions
     revalidatePath("/dashboard");
 
-    console.log(updateTask);
-    return updateTask;
+    console.log(updatedResource);
+    return updatedResource;
   } catch (error: any) {
     console.error("Error updating resource:", error);
     throw error;

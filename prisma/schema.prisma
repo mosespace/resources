@@ -74,6 +74,7 @@ model VerificationToken {
 model Category {
   id        String     @id @default(auto()) @map("_id") @db.ObjectId
   name      String?
+  slug      String?
   icon      String
   resources Resource[] // Defining a one-to-many relationship
   user      User       @relation(fields: [userId], references: [id]) // Defining a many-to-one relationship
@@ -87,6 +88,7 @@ model Resource {
   name        String
   description String
   url         String
+  slug        String?
   isApproved  Boolean @default(false) // Field to represent approval status, defaulting to false
 
   user       User?    @relation(fields: [userId], references: [id])

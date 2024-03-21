@@ -12,12 +12,26 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { UserAvatar } from "./user-avatar";
+import React from "react";
 
 interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
-  user: Pick<User, "name" | "image" | "email">
+  user: any;
+  resources?: any[];
 }
 
-export function UserAccountNav({ user }: UserAccountNavProps) {
+export function UserAccountNav({ user, resources }: UserAccountNavProps) {
+  const [notificationCount, setNotificationCount] = React.useState<any>(0);
+  const isAdmin = user?.role === "ADMIN";
+
+  // Calculate the number of notifications
+  React.useEffect(() => {
+    if (isAdmin) {
+      const count = resources?.filter(
+        (item) => item.isApproved === false
+      ).length;
+      setNotificationCount(count);
+    }
+  }, [isAdmin]);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -38,6 +52,18 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
           </div>
         </div>
         <DropdownMenuSeparator />
+
+        {isAdmin && (
+          <DropdownMenuItem asChild>
+            <Link href='/dashboard/approvals' className='cursor-pointer'>
+              Approvals&nbsp;
+              <span className='bg-amber-600 px-4 py-1'>
+                {notificationCount}
+              </span>
+            </Link>
+          </DropdownMenuItem>
+        )}
+
         <DropdownMenuItem asChild>
           <Link href='/dashboard'>Dashboard</Link>
         </DropdownMenuItem>

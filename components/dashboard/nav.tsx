@@ -54,8 +54,8 @@ import {
   PenLine,
   Hash,
   FolderOpen,
+  TrainFront,
   Ellipsis,
-  CopyIcon,
 } from "lucide-react";
 import { ScrollArea } from "../ui/scroll-area";
 import {
@@ -147,6 +147,7 @@ const iconComponents: any = {
   PenLine,
   Hash,
   FolderOpen,
+  TrainFront,
 };
 
 export function DashboardNav({ items, user }: any) {
@@ -215,13 +216,12 @@ export function DashboardNav({ items, user }: any) {
         <nav className='grid items-start gap-2'>
           {items.map((item: any, index: any) => {
             const Icon = iconComponents[item.icon || "arrowRight"];
-            const slug = item.name.toLowerCase().replace(/[\s/()]+/g, "-");
             return (
-              <Link key={index} href={`/dashboard/${slug}`}>
+              <Link key={index} href={`/dashboard/${item?.slug}`}>
                 <span
                   className={cn(
                     "group flex items-center justify-between rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground relative",
-                    path === `/dashboard/${slug}`
+                    path === `/dashboard/${item?.slug}`
                       ? "bg-accent bg-gradient-to-r from-transparent to-accent"
                       : "transparent",
                     item.disabled && "cursor-not-allowed opacity-80"
@@ -251,7 +251,9 @@ export function DashboardNav({ items, user }: any) {
                               onClick={(e) => {
                                 e.preventDefault();
                                 e.stopPropagation();
-                                router.push(`/dashboard/${slug}/${item.id}`);
+                                router.push(
+                                  `/dashboard/${item.slug}/${item.id}`
+                                );
                                 // location.reload();
                               }}
                             >
