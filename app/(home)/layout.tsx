@@ -19,7 +19,7 @@ export default async function MarketingLayout({
   const user = await getCurrentUser();
 
   if (user) {
-    return redirect("/dashboard");
+    return redirect("/leadboard");
   }
   return (
     <div className='flex min-h-screen flex-col dark:bg-slate-950 bg-white'>

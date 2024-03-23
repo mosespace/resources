@@ -3,9 +3,8 @@ import { DashboardConfig } from "@/types";
 export const dashboardConfig: DashboardConfig = {
   mainNav: [
     {
-      title: "Documentation",
-      href: "/docs",
-      disabled: true,
+      title: "Leader Board",
+      href: "/leadboard",
     },
     {
       title: "Support",

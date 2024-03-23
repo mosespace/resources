@@ -3,21 +3,21 @@ import React from "react";
 export default function page() {
   return (
     // <div className='p-4 z-0 flex flex-col relative justify-between gap-4 bg-content1 overflow-auto w-full shadow-none border rounded-md'>
-    //   <div className='flex space-x-3'>
-    //     <span className='flex relative justify-center items-center box-border overflow-hidden align-middle z-10 outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 w-10 h-10 text-tiny bg-default text-default-foreground rounded-full ring-2 ring-offset-2 ring-offset-background dark:ring-offset-background-dark ring-sky-700'>
-    //       <img
-    //         src='https://avatars.githubusercontent.com/u/94499610?v=4'
-    //         className='flex object-cover w-full h-full transition-opacity !duration-500 opacity-0 data-[loaded=true]:opacity-100'
-    //         alt='Anh Hoang'
-    //         data-loaded='true'
-    //       />
-    //     </span>
+    // <div className='flex space-x-3'>
+    // <span className='flex relative justify-center items-center box-border overflow-hidden align-middle z-10 outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 w-10 h-10 text-tiny bg-default text-default-foreground rounded-full ring-2 ring-offset-2 ring-offset-background dark:ring-offset-background-dark ring-sky-700'>
+    //   <img
+    //     src='https://avatars.githubusercontent.com/u/94499610?v=4'
+    //     className='flex object-cover w-full h-full transition-opacity !duration-500 opacity-0 data-[loaded=true]:opacity-100'
+    //     alt='Anh Hoang'
+    //     data-loaded='true'
+    //   />
+    // </span>
 
-    //     <div className='inline-flex flex-col items-start'>
-    //       <span className='text-small text-inherit'>Anh Hoang</span>
-    //       <span className='text-tiny text-foreground-400'>Level 32</span>
-    //     </div>
+    //   <div className='inline-flex flex-col items-start'>
+    //     <span className='text-small text-inherit'>Anh Hoang</span>
+    //     <span className='text-tiny text-foreground-400'>Level 32</span>
     //   </div>
+    // </div>
     // </div>
     <div className='w-full mx-auto'>
       <div className='flex flex-col justify-center items-center h-[100vh]'>

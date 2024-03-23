@@ -20,6 +20,21 @@ export async function getUser(id: any) {
   }
 }
 
+export async function getUsers() {
+  try {
+    const users = await db.user.findMany({
+      include: {
+        resources: true,
+        categories: true,
+      },
+    });
+    return users;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
 export async function getAllAdmins() {
   try {
     const admins = await db.user.findMany({
