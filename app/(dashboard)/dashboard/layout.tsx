@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import { dashboardConfig } from "@/config/dashboard";
 import { MainNav } from "@/components/main-nav";
@@ -9,7 +9,7 @@ import Announcement from "@/components/dashboard/announcement";
 import { SearchCommand } from "@/components/dashboard/search-command";
 import { getCurrentUser } from "@/lib/authProvider";
 import { CrudOperations } from "@/components/dashboard/crud-operations";
-import { getCategories, getResources } from "@/actions/resources";
+import { getCategories, getResources, getUser } from "@/actions/resources";
 
 interface DashboardLayoutProps {
   children?: React.ReactNode;
@@ -19,12 +19,21 @@ export default async function DashboardLayout({
   children,
 }: DashboardLayoutProps) {
   const user: any = await getCurrentUser();
+  // console.log(user);
   const categories = await getCategories();
 
   const resources = await getResources();
 
+  const userId = user?.id;
+  const dbUser = await getUser(userId);
+  const username = dbUser?.name;
+
   if (!user) {
     return notFound();
+  }
+
+  if (username === null) {
+    return redirect("/onboarding");
   }
 
   return (

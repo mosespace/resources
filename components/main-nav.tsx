@@ -54,7 +54,6 @@ export function MainNav({ items, children }: MainNavProps) {
         {showMobileMenu ? (
           <Icons.close />
         ) : (
-          // <Icons.logo />
           <img src='/logo.svg' alt='' className='w-5 h-5' />
         )}
         <span className='font-bold'>Menu</span>

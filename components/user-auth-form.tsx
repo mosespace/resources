@@ -31,14 +31,13 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   });
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [isGitHubLoading, setIsGitHubLoading] = React.useState<boolean>(false);
+
   const searchParams = useSearchParams();
 
   async function onSubmit(data: FormData) {
-    console.log(data);
     setIsLoading(true);
 
     const signInResult = await signIn("resend", {
-      // name: data.name, // Include name in the signIn function call
       email: data.email.toLowerCase(),
       redirect: false,
       callbackUrl: searchParams?.get("from") || "/dashboard",
@@ -65,24 +64,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     <div className={cn("grid gap-6", className)} {...props}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className='grid gap-2'>
-          {/* <div className='grid gap-1'>
-            <Label className='sr-only' htmlFor='name'>
-              Name
-            </Label>
-            <Input
-              id='name'
-              placeholder='John Doe'
-              type='text'
-              autoCapitalize='on'
-              autoComplete='off'
-              autoCorrect='off'
-              disabled={isLoading || isGitHubLoading}
-              {...register("name")}
-            />
-            {errors?.name && (
-              <p className='px-1 text-xs text-red-600'>{errors.name.message}</p>
-            )}
-          </div> */}
           <div className='grid gap-1'>
             <Label className='sr-only' htmlFor='email'>
               Email
@@ -105,7 +86,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           </div>
           <button className={cn(buttonVariants())} disabled={isLoading}>
             {isLoading && <Loader className='mr-2 h-4 w-4 animate-spin' />}
-            Sign In credentials
+            Sign in with credentials
           </button>
         </div>
       </form>

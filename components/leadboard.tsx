@@ -11,14 +11,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import {
-  DropdownMenuTrigger,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuItem,
-  DropdownMenuContent,
-  DropdownMenu,
-} from "@/components/ui/dropdown-menu";
-import {
   TableHead,
   TableRow,
   TableHeader,
@@ -26,7 +18,6 @@ import {
   TableBody,
   Table,
 } from "@/components/ui/table";
-import { getUsers } from "@/actions/resources";
 import { useState } from "react";
 import { UserAccountNav } from "./dashboard/user-account-nav";
 
@@ -45,7 +36,7 @@ export default function LeadBoard({ users, sessionUser }: any) {
 
   // Filter users based on search query
   const filteredUsers = sortedUsers.filter((user: any) =>
-    user.name.toLowerCase().includes(searchQuery.toLowerCase())
+    user?.name?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   // Function to handle input change
@@ -58,7 +49,7 @@ export default function LeadBoard({ users, sessionUser }: any) {
   return (
     <div className='grid min-h-screen w-full lg:grid-cols-[280px_1fr]'>
       <div className='hidden border-r bg-gray-100/40 lg:block dark:bg-gray-800/40'>
-        <div className='flex h-fullk max-h-screen flex-col gap-2'>
+        <div className='flex max-h-screen flex-col gap-2'>
           <div className='flex h-[60px] items-center border-b px-6'>
             <Link className='flex items-center gap-2 font-semibold' href='#'>
               <Package2Icon className='h-6 w-6' />
@@ -197,9 +188,9 @@ export default function LeadBoard({ users, sessionUser }: any) {
                                 viewBox='0 0 24 24'
                                 fill='none'
                                 stroke='currentColor'
-                                stroke-width='2'
-                                stroke-linecap='round'
-                                stroke-linejoin='round'
+                                strokeWidth='2'
+                                strokeLinecap='round'
+                                strokeLinejoin='round'
                                 className='lucide lucide-gem h-3 w-3 text-white'
                               >
                                 <path d='M6 3h12l4 6-10 13L2 9Z'></path>

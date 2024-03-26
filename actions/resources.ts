@@ -5,16 +5,13 @@ import { revalidatePath } from "next/cache";
 
 export async function getUser(id: any) {
   try {
-    if (!id) {
-      throw new Error("User ID is undefined");
-    }
     const user = await db.user.findUnique({
       where: {
         id: id,
       },
     });
     return user;
-  } catch (error) {
+  } catch (error: any) {
     console.log(error);
     throw error;
   }
@@ -46,6 +43,35 @@ export async function getAllAdmins() {
   } catch (error: any) {
     console.log(error);
     throw error; // Ensure errors are propagated for proper error handling
+  }
+}
+
+export async function updateUser(id: any, data: any) {
+  try {
+    // Retrieve the user from the database using both id and userId
+    const user = await db.user.findUnique({
+      where: { id },
+    });
+    // console.log(`original user: ${user}`);
+    // Check if the user exists
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    // If the user matches, proceed with updating the it
+    const updateUser = await db.user.update({
+      where: { id },
+      data,
+    });
+
+    // Perform any necessary post-deletion actions
+    revalidatePath("/dashboard");
+
+    console.log(updateUser);
+    return updateUser;
+  } catch (error: any) {
+    console.error("Error updating user:", error);
+    throw error;
   }
 }
 
@@ -253,41 +279,6 @@ export async function updateResource(id: any, data: any) {
     throw error;
   }
 }
-
-// export async function updateCategory(id: any, data: any, userId: any) {
-//   try {
-//     // Retrieve the category from the database using both id and userId
-//     const category = await db.category.findUnique({
-//       where: { id },
-//       select: { userId: true }, // Only select the userId field
-//     });
-
-//     // Check if the category exists
-//     if (!category) {
-//       throw new Error("Task not found");
-//     }
-
-//     // Check if the userId of the category matches the provided userId
-//     if (category.userId !== userId) {
-//       throw new Error("Unauthorized update attempt");
-//     }
-
-//     // If the userId matches, proceed with updating the category
-//     const updateTask = await db.category.update({
-//       where: { id },
-//       data,
-//     });
-
-//     // Perform any necessary post-deletion actions
-//     revalidatePath("/dashboard");
-
-//     console.log(updateTask);
-//     return updateTask;
-//   } catch (error: any) {
-//     console.error("Error updating category:", error);
-//     throw error;
-//   }
-// }
 
 export async function deleteResource(id: any, userId: any) {
   // console.log(id, userId);

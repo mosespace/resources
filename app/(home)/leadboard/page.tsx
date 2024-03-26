@@ -4,9 +4,7 @@ import { getCurrentUser } from "@/lib/authProvider";
 
 export default async function Component() {
   const users = await getUsers();
-  const sessionUser = await getCurrentUser()
-  // console.log(users);
-  return (
-    <LeadBoard users={users} sessionUser={sessionUser}/>
-  );
+  const sessionUser = await getCurrentUser();
+  // console.log(sessionUser);
+  return <LeadBoard users={users} sessionUser={sessionUser} />;
 }

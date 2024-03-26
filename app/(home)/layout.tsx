@@ -7,7 +7,7 @@ import { MainNav } from "@/components/main-nav";
 import { SiteFooter } from "@/components/site-footer";
 import GitHubButton from "@/components/github-button";
 import { getCurrentUser } from "@/lib/authProvider";
-import { redirect } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 interface MarketingLayoutProps {
   children: React.ReactNode;
@@ -18,9 +18,6 @@ export default async function MarketingLayout({
 }: MarketingLayoutProps) {
   const user = await getCurrentUser();
 
-  if (user) {
-    return redirect("/leadboard");
-  }
   return (
     <div className='flex min-h-screen flex-col dark:bg-slate-950 bg-white'>
       <header className='container z-40 bg-background'>
@@ -28,15 +25,17 @@ export default async function MarketingLayout({
           <MainNav items={marketingConfig.mainNav} />
           <nav className='flex space-x-2 items-center'>
             <GitHubButton />
-            <Link
-              href='/login'
-              className={cn(
-                buttonVariants({ variant: "secondary", size: "sm" }),
-                "px-4"
-              )}
-            >
-              Login
-            </Link>
+            {!user && (
+              <Link
+                href='/login'
+                className={cn(
+                  buttonVariants({ variant: "secondary", size: "sm" }),
+                  "px-4"
+                )}
+              >
+                Login
+              </Link>
+            )}
           </nav>
         </div>
       </header>

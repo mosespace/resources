@@ -27,7 +27,7 @@ export const authOptions: NextAuthOptions = {
             from: "Resources Inc <email@mosespace.com>",
             to: [email],
             subject: `Confirm Your Email Address`,
-            react: MagicLinkEmail({ url, name }), // Remove 'as any' if types are compatible
+            react: MagicLinkEmail({ url, name }),
           });
 
           console.log(`Verification email sent successfully to: ${email}`);
@@ -45,7 +45,6 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ email }) {
       if (email && email.verificationRequest === true) {
-        console.log("Email has been verified");
       } else {
         console.log(
           "User signed in but email is not available or not verified yet"

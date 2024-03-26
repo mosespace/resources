@@ -35,21 +35,16 @@ export const userAuthSchema = z.object({
     .email({
       message: "You've not specified an email or not a valid email",
     }),
-  // name: z
-  //   .string({
-  //     required_error: "Names are required",
-  //   })
-  //   .min(6, {
-  //     message: "Names too short - should be 6 chars minimum",
-  //   }),
-
-  // password: z
-  //   .string({
-  //     required_error: "Password is required",
-  //   })
-  //   .min(8, {
-  //     message: "Password too short - should be 8 chars minimum",
-  //   }),
+});
+export const onBoardingAuth = z.object({
+  name: z
+    .string({
+      required_error: "Names are required",
+    })
+    .min(6, {
+      message: "Names too short - should be 6 chars minimum",
+    }),
+  image: z.string(),
 });
 
 export const categorySchema = z.object({
