@@ -9,6 +9,8 @@ import { cn } from "@/lib/utils";
 import { Icons } from "@/components/icons";
 import { MobileNav } from "@/components/mobile-nav";
 import { MainNavItem } from "@/types";
+import { DashboardNav } from "./dashboard/nav";
+import { Menu } from "lucide-react";
 
 interface MainNavProps {
   items?: MainNavItem[];
@@ -28,6 +30,7 @@ export function MainNav({ items, children }: MainNavProps) {
           {siteConfig.name}
         </span>
       </Link>
+
       {items?.length ? (
         <nav className='hidden gap-6 md:flex'>
           {items?.map((item, index) => (
@@ -51,12 +54,8 @@ export function MainNav({ items, children }: MainNavProps) {
         className='flex items-center space-x-2 md:hidden'
         onClick={() => setShowMobileMenu(!showMobileMenu)}
       >
-        {showMobileMenu ? (
-          <Icons.close />
-        ) : (
-          <img src='/logo.svg' alt='' className='w-5 h-5' />
-        )}
-        <span className='font-bold'>Menu</span>
+        {showMobileMenu ? <Icons.close /> : <Menu />}
+        <img src='/logo.svg' alt='' className='w-5 h-5' />
       </button>
       {showMobileMenu && items && (
         <MobileNav items={items}>{children}</MobileNav>

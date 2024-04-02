@@ -126,7 +126,7 @@ export default function LeadBoard({ users, sessionUser }: any) {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className='w-[95px]'>Rank</TableHead>
+                  <TableHead className='w-[45px] lg:w-[95px]'>Rank</TableHead>
                   <TableHead className='max-w-[150px]'>User Info</TableHead>
                   <TableHead>Points</TableHead>
                 </TableRow>
@@ -199,14 +199,14 @@ export default function LeadBoard({ users, sessionUser }: any) {
                               </svg>
                             </span>
                           </div>
-                          <div className='relative max-w-fit inline-flex items-center justify-between box-border whitespace-nowrap px-1 h-6 rounded-full bg-sky-500/10 text-sky-800 text-xs font-bold'>
-                            {/* Display the "Pro" span only for the first 5 users */}
+                          {/* <div className='relative max-w-fit inline-flex items-center justify-between box-border whitespace-nowrap px-1 h-6 rounded-full bg-sky-500/10 text-sky-800 text-xs font-bold'>
+                            Display the "Pro" span only for the first 5 users
                             {index < 5 && (
                               <span className='flex-1 text-inherit font-normal px-1'>
                                 Pro
                               </span>
                             )}
-                          </div>
+                          </div> */}
                         </div>
                       </TableCell>
 

@@ -21,7 +21,7 @@ export const authOptions: NextAuthOptions = {
         const resend = new Resend(process.env.RESEND_API_KEY as any);
 
         const { identifier: email, url, name } = params;
-        console.log(`Sending verification request email to: ${name}`);
+        // console.log(`Sending verification request email to: ${name}`);
         try {
           await resend.emails.send({
             from: "Resources Inc <email@mosespace.com>",
@@ -30,13 +30,13 @@ export const authOptions: NextAuthOptions = {
             react: MagicLinkEmail({ url, name }),
           });
 
-          console.log(`Verification email sent successfully to: ${email}`);
+          // console.log(`Verification email sent successfully to: ${email}`);
         } catch (error) {
           console.error(
             `Failed to send verification email to ${email}:`,
             error
           );
-          throw new Error("Failed to send verification Email");
+          // throw new Error("Failed to send verification Email");
         }
       },
     } as any,
@@ -46,9 +46,9 @@ export const authOptions: NextAuthOptions = {
     async signIn({ email }) {
       if (email && email.verificationRequest === true) {
       } else {
-        console.log(
-          "User signed in but email is not available or not verified yet"
-        );
+        // console.log(
+        //   "User signed in but email is not available or not verified yet"
+        // );
       }
       return true;
     },

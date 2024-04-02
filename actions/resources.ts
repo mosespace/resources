@@ -2,6 +2,7 @@
 
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
+import { parse } from "node-html-parser";
 
 export async function getUser(id: any) {
   try {
@@ -313,4 +314,21 @@ export async function deleteResource(id: any, userId: any) {
     console.error("Error deleting resource:", error);
     throw error;
   }
+}
+
+export async function fetchOGImage(url: any) {
+  try {
+    const response = await fetch(url);
+    const html = await response.text();
+    const root = parse(html);
+    // console.log(root);
+    const ogImageElement = root.querySelector('meta[property="og:image"]');
+
+    if (ogImageElement) {
+      return ogImageElement.getAttribute("content");
+    }
+  } catch (error) {
+    console.error("Error fetching OG image:", error);
+  }
+  return null;
 }

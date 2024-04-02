@@ -10,6 +10,7 @@ import { SearchCommand } from "@/components/dashboard/search-command";
 import { getCurrentUser } from "@/lib/authProvider";
 import { CrudOperations } from "@/components/dashboard/crud-operations";
 import { getCategories, getResources, getUser } from "@/actions/resources";
+import { ModeToggle } from "@/components/mode-toggle";
 
 interface DashboardLayoutProps {
   children?: React.ReactNode;
@@ -44,7 +45,8 @@ export default async function DashboardLayout({
           <MainNav items={dashboardConfig.mainNav} />
           <div className='flex space-x-2'>
             <div className='hidden md:flex space-x-2 items-center'>
-              <SearchCommand />
+              {/* <SearchCommand /> */}
+              <ModeToggle />
               <CrudOperations
                 user={user}
                 initialData=''
