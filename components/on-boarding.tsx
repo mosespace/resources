@@ -13,7 +13,7 @@ import { onBoardingAuth } from "@/schema/schema";
 import { cn } from "@/lib/utils";
 import { Loader } from "lucide-react";
 import { getCurrentUser } from "@/lib/authProvider";
-import { updateUser } from "@/actions/resources";
+import { updateUser } from "@/actions/users";
 import { useRouter } from "next/navigation";
 import ImageInput from "@/components/image-input";
 

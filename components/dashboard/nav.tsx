@@ -93,7 +93,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { useState } from "react";
-import { deleteCategory } from "@/actions/resources";
+import { deleteCategory } from "@/actions/categories";
 
 // Creating a mapping of icon names to their corresponding components
 const iconComponents: any = {

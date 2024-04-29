@@ -82,7 +82,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { toast } from "../ui/use-toast";
-import { postCategory, updateCategory } from "@/actions/resources";
+import { postCategory, updateCategory } from "@/actions/categories";
 import { generateSlug } from "@/lib/generateSlug";
 
 const icons = [

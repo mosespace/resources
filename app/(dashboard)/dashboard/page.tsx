@@ -1,4 +1,5 @@
-import { getCategories, getResources } from "@/actions/resources";
+import { getResources } from "@/actions/resources";
+import { getCategories } from "@/actions/categories";
 import Resource from "@/components/dashboard/resource";
 import { getCurrentUser } from "@/lib/authProvider";
 import React from "react";

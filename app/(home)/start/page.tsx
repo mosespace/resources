@@ -1,4 +1,5 @@
-import { getCategories, getResources } from "@/actions/resources";
+import { getResources } from "@/actions/resources";
+import { getCategories } from "@/actions/categories";
 import ResourcesListing from "@/components/resources-listing";
 
 import React from "react";

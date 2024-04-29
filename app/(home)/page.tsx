@@ -1,4 +1,5 @@
-import { getCategories, getResources } from "@/actions/resources";
+import { getResources } from "@/actions/resources";
+import { getCategories } from "@/actions/categories";
 import Link from "next/link";
 import React from "react";
 
