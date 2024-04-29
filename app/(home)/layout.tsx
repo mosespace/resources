@@ -1,11 +1,12 @@
 import { marketingConfig } from "@/config/marketing";
-import { Button } from "@/components/ui/button";
 import { MainNav } from "@/components/main-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { getCurrentUser } from "@/lib/authProvider";
-import { Plus } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
 import { SendFeedback } from "@/components/send-feedback";
+import CreateButton from "@/components/create-button";
+import { UserAccountNav } from "@/components/dashboard/user-account-nav";
+import { getResources } from "@/actions/resources";
 
 interface MarketingLayoutProps {
   children: React.ReactNode;
@@ -14,7 +15,8 @@ interface MarketingLayoutProps {
 export default async function MarketingLayout({
   children,
 }: MarketingLayoutProps) {
-  const user = await getCurrentUser();
+  const user: any = await getCurrentUser();
+  const resources = await getResources();
 
   return (
     <div className='flex px-8 min-h-screen flex-col'>
@@ -52,15 +54,24 @@ export default async function MarketingLayout({
             <div className='hidden md:block'>
               <ModeToggle />
             </div>
-            <Button>
-              <Plus className='mr-2 h-4 w-4 stroke' /> Add Resource
-            </Button>
+            <CreateButton user={user} />
+            {user && (
+              <UserAccountNav
+                user={{
+                  name: user?.name,
+                  image: user?.image,
+                  email: user?.email,
+                  role: user?.role,
+                }}
+                resources={resources}
+              />
+            )}
           </nav>
         </div>
       </header>
 
       <main className='md:container px-3s md:flex-1'>{children}</main>
-      <SendFeedback />
+      <SendFeedback user={user} />
       <SiteFooter />
     </div>
   );

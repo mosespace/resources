@@ -1,6 +1,7 @@
 "use client";
 
 // import { sendFeedback } from "@/actions/feedback";
+import * as React from "react";
 import {
   Drawer,
   DrawerContent,
@@ -10,12 +11,61 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Input } from "@/components/ui/input";
-import * as React from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 import { Button } from "@/components/ui/button";
-// import { SubmitButton } from "./submit-button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
+import { toast } from "@/components/ui/use-toast";
+import { sendFeedback } from "@/actions/feedback";
+import { useRouter } from "next/navigation";
+import { Loader } from "lucide-react";
 
-export const SendFeedback = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
+const FormSchema = z.object({
+  message: z.string().min(2, {
+    message: "Message must be at least 2 characters.",
+  }),
+  userId: z.string().optional(),
+});
+
+export const SendFeedback = ({ user }: any) => {
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      message: "",
+      userId: user?.id || "",
+    },
+  });
+
+  const [isOpen, setIsOpen] = React.useState<boolean>(false);
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  const router = useRouter();
+  const userId = user?.id;
+
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    setLoading(true);
+    data.userId = userId;
+
+    if (userId) {
+      await sendFeedback(data);
+      toast({
+        title: "Feedback has been submitted",
+      });
+      setLoading(false);
+    } else {
+      setLoading(false);
+      router.push("/login");
+    }
+
+    setIsOpen(false);
+  }
   return (
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger asChild>
@@ -33,16 +83,29 @@ export const SendFeedback = () => {
           </DrawerDescription>
         </DrawerHeader>
 
-        <form
-          className='w-full flex flex-col gap-2 max-w-2xl mx-auto px-4'
-          //   action={async (formdata) => {
-          //     await sendFeedback(formdata);
-          //     setIsOpen(false);
-          //   }}
-        >
-          <Input placeholder='' name='message' required />
-          <Button>send feedback</Button>
-        </form>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className='w-full flex flex-col gap-2 max-w-2xl mx-auto px-4'
+          >
+            <FormField
+              control={form.control}
+              name='message'
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input placeholder='' {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button className='flex items-center gap-2'>
+              {loading && <Loader className='w-4 h-4 animate-spin' />}
+              send feedback
+            </Button>
+          </form>
+        </Form>
       </DrawerContent>
     </Drawer>
   );

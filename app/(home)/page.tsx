@@ -1,15 +1,9 @@
 import { getCategories, getResources } from "@/actions/resources";
-import Filters from "@/components/resources-listing";
 import Link from "next/link";
 import React from "react";
 
 export default async function Page() {
   const resources = await getResources();
-  const categories = await getCategories();
-
-  const approvedResources = resources?.filter(
-    (approved_resource) => approved_resource.isApproved === true
-  );
 
   return (
     <div className='flex flex-col py-12 lg:pt-12 h-screen px-0 lg:px-8 sm:mt-12 sm:px-6 justify-center items-center'>

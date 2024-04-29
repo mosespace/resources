@@ -1,5 +1,6 @@
 import { getCategories, getResources } from "@/actions/resources";
 import ResourcesListing from "@/components/resources-listing";
+
 import React from "react";
 
 export default async function page() {

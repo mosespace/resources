@@ -54,6 +54,7 @@ model User {
   sessions      Session[]
   resources     Resource[]
   categories    Category[]
+  feedbacks    Feedback[]
   role      UserRole @default(USER)
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @map(name: "updated_at")
@@ -99,4 +100,13 @@ model Resource {
   updatedAt  DateTime @default(now()) @map(name: "updated_at")
 
   @@map(name: "resources")
+}
+
+model Feedback{
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  message      String?
+  user      User       @relation(fields: [userId], references: [id]) // Defining a many-to-one relationship
+  userId    String     @db.ObjectId // Foreign key 
+  createdAt DateTime   @default(now()) @map(name: "created_at")
+  updatedAt DateTime   @default(now()) @map(name: "updated_at")
 }
