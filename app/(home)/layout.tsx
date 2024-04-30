@@ -51,7 +51,7 @@ export default async function MarketingLayout({
         </div>
       </header>
 
-      <main className='md:container w-full md:max-w-6xl items-center justify-between mx-auto md:flex-1 lg:flex'>
+      <main className='w-full md:max-w-6xl items-center justify-between mx-auto md:flex-1 lg:flex'>
         {children}
       </main>
       <SendFeedback user={user} />
