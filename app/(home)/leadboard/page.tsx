@@ -1,4 +1,4 @@
-import { getUsers } from "@/actions/resources";
+import { getUsers } from "@/actions/users";
 import LeadBoard from "@/components/leadboard";
 import { getCurrentUser } from "@/lib/authProvider";
 

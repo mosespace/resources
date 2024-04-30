@@ -1,4 +1,4 @@
-import { findCategory } from "@/actions/resources";
+import { findCategory } from "@/actions/categories";
 import CategoryCreate from "@/components/dashboard/category-crud";
 import { getCurrentUser } from "@/lib/authProvider";
 import React from "react";

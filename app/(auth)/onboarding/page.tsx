@@ -1,4 +1,4 @@
-import { getUser } from "@/actions/resources";
+import { getUser } from "@/actions/users";
 import OnBoarding from "@/components/on-boarding";
 import { getCurrentUser } from "@/lib/authProvider";
 import React from "react";

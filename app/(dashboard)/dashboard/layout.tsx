@@ -1,15 +1,15 @@
 import { notFound, redirect } from "next/navigation";
-
 import { dashboardConfig } from "@/config/dashboard";
 import { MainNav } from "@/components/main-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { DashboardNav } from "@/components/dashboard/nav";
 import { UserAccountNav } from "@/components/dashboard/user-account-nav";
 import Announcement from "@/components/dashboard/announcement";
-import { SearchCommand } from "@/components/dashboard/search-command";
 import { getCurrentUser } from "@/lib/authProvider";
 import { CrudOperations } from "@/components/dashboard/crud-operations";
-import { getCategories, getResources, getUser } from "@/actions/resources";
+import { getUser } from "@/actions/users";
+import { getResources } from "@/actions/resources";
+import { getCategories } from "@/actions/categories";
 import { ModeToggle } from "@/components/mode-toggle";
 
 interface DashboardLayoutProps {

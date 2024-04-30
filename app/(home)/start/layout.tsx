@@ -1,4 +1,5 @@
-import { getCategories, getResources } from "@/actions/resources";
+import { getResources } from "@/actions/resources";
+import { getCategories} from "@/actions/categories";
 import { redirect } from "next/navigation";
 import CategoriesSidebar from "@/components/categories-sidebar";
 import HeadingSection from "@/components/heading-section";
