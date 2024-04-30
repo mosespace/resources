@@ -1,16 +1,19 @@
+"use client";
+
 import React from "react";
 import { Button } from "./ui/button";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Plus } from "lucide-react";
 
 export default function CreateButton({ user }: any) {
   const userId = user?.id;
+  const router = useRouter();
 
   function handleCreate() {
     if (userId) {
-      redirect("/start");
+      router.push("/start");
     } else {
-      redirect("/login");
+      router.push("/login");
       return null;
     }
   }
