@@ -1,5 +1,4 @@
 import { getResources } from "@/actions/resources";
-import { getCategories } from "@/actions/categories";
 import Link from "next/link";
 import React from "react";
 
@@ -7,8 +6,8 @@ export default async function Page() {
   const resources = await getResources();
 
   return (
-    <div className='flex flex-col py-12 lg:pt-12 h-screen px-0 lg:px-8 sm:mt-12 sm:px-6 justify-center items-center'>
-      <div className='mx-auto mt-10 flex justify-center md:mt-16 lg:mt-20'>
+    <div className='flex flex-col h-screen px-0 lg:px-8 sm:px-6 justify-center items-center'>
+      <div className='mx-auto mt-10 flex justify-center md:mt-16 px-12 lg:px-0'>
         <div className='text-center'>
           <h1 className='text-[20px] font-extrabold tracking-tight text-gray-900 dark:text-slate-200 sm:text-5xl md:text-6xl'>
             <span className='block xl:inline'>
