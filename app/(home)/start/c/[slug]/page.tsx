@@ -9,7 +9,7 @@ export default async function page({ params: { slug } }: any) {
 
   // Step 2: Find the category with the matching slug
   const filteredCategory = categories?.find(
-    (category) => category.slug === slug
+    (category) => category.slug === decodeURIComponent(slug)
   );
 
   // Step 3: Setting the categoryId
@@ -25,6 +25,7 @@ export default async function page({ params: { slug } }: any) {
   }
 
   // Step 3: Output the filtered category and resources
+  // console.log(slug);
   // console.log("Filtered Category:", filteredCategory);
   // console.log("Filtered Resources:", filteredResources);
   return <ResourcesListing data={filteredResources} categories={categories} />;

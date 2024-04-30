@@ -55,7 +55,7 @@ export function UserAccountNav({ user, resources }: UserAccountNavProps) {
 
         {isAdmin && (
           <DropdownMenuItem asChild>
-            <Link href='/dashboard/approvals' className='cursor-pointer'>
+            <Link href='/start/approvals' className='cursor-pointer'>
               Approvals&nbsp;
               <span className='bg-amber-600 px-4 py-1'>
                 {notificationCount}

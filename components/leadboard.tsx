@@ -47,7 +47,7 @@ export default function LeadBoard({ users, sessionUser }: any) {
   const resources: any = [];
 
   return (
-    <div className='grid min-h-screen w-full lg:grid-cols-[290px_1fr]'>
+    <div className='grid lg:mt-20 mt-24 min-h-screen w-full lg:grid-cols-[290px_1fr]'>
       <div className='hidden border-r bg-gray-100/40 lg:block dark:bg-gray-800/40'>
         <div className='flex max-h-screen flex-col gap-2'>
           {/* <div className='flex h-[60px] items-center border-b px-6'>

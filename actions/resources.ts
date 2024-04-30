@@ -109,7 +109,7 @@ export async function deleteResource(id: any, userId: any) {
 
     // Check if the resource exists
     if (!resource) {
-      throw new Error("Task not found");
+      throw new Error("Resource not found");
     }
 
     // Check if the userId of the resource matches the provided userId
@@ -118,15 +118,15 @@ export async function deleteResource(id: any, userId: any) {
     }
 
     // If the userId matches, proceed with deleting the resource
-    const deletedTask = await db.resource.delete({
+    const deleteResource = await db.resource.delete({
       where: { id },
     });
 
     // Perform any necessary post-deletion actions
     revalidatePath("/dashboard");
 
-    // console.log(deletedTask);
-    return deletedTask;
+    // console.log(deleteResource);
+    return deleteResource;
   } catch (error: any) {
     console.error("Error deleting resource:", error);
     throw error;
