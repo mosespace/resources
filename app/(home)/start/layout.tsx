@@ -30,10 +30,10 @@ export default async function DashboardLayout({
   const user: any = await getCurrentUser();
   const userId = user?.id;
 
-  if (!userId) {
-    redirect("/login");
-    return null; // Return early to prevent further execution
-  }
+  // if (!userId) {
+  //   redirect("/login");
+  //   return null; // Return early to prevent further execution
+  // }
 
   return (
     <section className='flex w-full md:max-w-6xl items-center justify-between mx-auto md:flex-1 mt-10 md:mt-16 lg:mt-20'>
