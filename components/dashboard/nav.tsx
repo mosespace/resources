@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import {
+  Slack,
   Award,
   Bomb,
   BoomBox,
@@ -97,6 +98,7 @@ import { deleteCategory } from "@/actions/categories";
 
 // Creating a mapping of icon names to their corresponding components
 const iconComponents: any = {
+  Slack,
   Award,
   Bomb,
   BoomBox,

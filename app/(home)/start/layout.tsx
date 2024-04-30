@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+
 import { getResources } from "@/actions/resources";
 import { getCategories } from "@/actions/categories";
 import { redirect } from "next/navigation";
@@ -8,6 +10,12 @@ import { getCurrentUser } from "@/lib/authProvider";
 interface DashboardLayoutProps {
   children?: React.ReactNode;
 }
+
+export const metadata: Metadata = {
+  title: "Complete Developer Resources.",
+  description:
+    "Daily Front-end Development short resources and tricks for React, TypeScript HTML, CSS, and Vanilla JavaScript, alongside essential libraries and tools. Build 10X faster with the best resources",
+};
 
 export default async function DashboardLayout({
   children,

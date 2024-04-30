@@ -16,6 +16,7 @@ import {
   SelectValue,
 } from "../../ui/select";
 import {
+  Slack,
   Award,
   Bomb,
   BoomBox,
@@ -80,6 +81,11 @@ export default function CustomSelect({
       value: "ShoppingBasket",
       label: "ShoppingBasket",
       icon: <ShoppingBasket className='w-5 h-5' />,
+    },
+    {
+      value: "Slack",
+      label: "Slack",
+      icon: <Slack className='w-5 h-5' />,
     },
     {
       value: "ShoppingBasket",

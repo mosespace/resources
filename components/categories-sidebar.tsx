@@ -62,12 +62,14 @@ import {
   FolderOpen,
   TrainFront,
   RefreshCw,
+  Slack,
 } from "lucide-react";
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 // Creating a mapping of icon names to their corresponding components
 const iconComponents: any = {
+  Slack,
   SquareArrowOutUpRight,
   Award,
   Bomb,

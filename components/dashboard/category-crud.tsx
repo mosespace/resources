@@ -20,6 +20,7 @@ import {
   SelectGroup,
 } from "@/components/ui/select";
 import {
+  Slack,
   Award,
   Bomb,
   BoomBox,
@@ -106,6 +107,11 @@ const icons = [
     value: "ShoppingBasket",
     label: "ShoppingBasket",
     icon: <TrainFront className='w-5 h-5' />,
+  },
+  {
+    value: "Slack",
+    label: "Slack",
+    icon: <Slack  className='w-5 h-5' />,
   },
   {
     value: "SearchCheck",

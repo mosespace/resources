@@ -8,7 +8,7 @@ export async function postCategory(data: any) {
     const category = await db.category.create({
       data,
     });
-    revalidatePath("/dashboard");
+    revalidatePath("/start");
     console.log("The following category was created:", category);
     return category;
   } catch (error: any) {
@@ -43,7 +43,7 @@ export async function findCategory(id: any) {
         user: true,
       },
     });
-    revalidatePath("/dashboard");
+    revalidatePath("/start");
     return category;
   } catch (error: any) {
     console.log(error);
@@ -75,7 +75,7 @@ export async function updateCategory(id: any, data: any, userId: any) {
     });
 
     // Perform any necessary post-deletion actions
-    revalidatePath("/dashboard");
+    revalidatePath("/start");
 
     // console.log(updatedCategory);
     return updatedCategory;
@@ -104,7 +104,7 @@ export async function deleteCategory(id: any) {
     });
 
     // Perform any necessary category-deletion actions
-    revalidatePath("/dashboard");
+    revalidatePath("/start");
 
     // console.log(deletedCategory);
     return deletedCategory;

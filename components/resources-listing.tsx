@@ -9,22 +9,22 @@ export default function ResourcesListing({ data }: any) {
   const [ogImages, setOgImages] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    setLoading(true);
-    const fetchOgImages = async () => {
-      try {
-        const images: any = await Promise.all(
-          data.map((resource: any) => fetchOGImage(resource.url))
-        );
-        setOgImages(images);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching OG images:", error);
-        setLoading(false);
-      }
-    };
-    fetchOgImages();
-  }, [data]);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   const fetchOgImages = async () => {
+  //     try {
+  //       const images: any = await Promise.all(
+  //         data.map((resource: any) => fetchOGImage(resource.url))
+  //       );
+  //       setOgImages(images);
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.error("Error fetching OG images:", error);
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchOgImages();
+  // }, [data]);
 
   return (
     <main className='grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-3 gap-8'>
