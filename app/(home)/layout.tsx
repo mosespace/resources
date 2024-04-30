@@ -4,9 +4,10 @@ import { SiteFooter } from "@/components/site-footer";
 import { getCurrentUser } from "@/lib/authProvider";
 import { ModeToggle } from "@/components/mode-toggle";
 import { SendFeedback } from "@/components/send-feedback";
-import CreateButton from "@/components/create-button";
 import { UserAccountNav } from "@/components/dashboard/user-account-nav";
 import { getResources } from "@/actions/resources";
+import { CrudOperations } from "@/components/dashboard/crud-operations";
+import { getCategories } from "@/actions/categories";
 
 interface MarketingLayoutProps {
   children: React.ReactNode;
@@ -17,6 +18,7 @@ export default async function MarketingLayout({
 }: MarketingLayoutProps) {
   const user: any = await getCurrentUser();
   const resources = await getResources();
+  const categories = await getCategories();
 
   return (
     <div className='flex px-8 min-h-screen flex-col'>
@@ -54,7 +56,11 @@ export default async function MarketingLayout({
             <div className='hidden md:block'>
               <ModeToggle />
             </div>
-            <CreateButton user={user} />
+            <CrudOperations
+              user={user}
+              initialData=''
+              categories={categories}
+            />
             {user && (
               <UserAccountNav
                 user={{

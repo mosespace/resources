@@ -34,8 +34,22 @@ import { Loader, Plus } from "lucide-react";
 import { getCurrentUser } from "@/lib/authProvider";
 import { generateSlug } from "@/lib/generateSlug";
 
+
+
 export function CrudOperations({ user, initialData, categories }: any) {
   // console.log(categories);
+  const userId = user?.id;
+  const router = useRouter();
+
+  function handleCreate() {
+    if (!userId) {
+      toast({
+        title: "You need to be logged in to add a resource.",
+      });
+      router.push("/login");
+      return null;
+    }
+  }
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -58,8 +72,6 @@ export function CrudOperations({ user, initialData, categories }: any) {
     const slug = generateSlug(data.name);
     const updatedData = { ...data, slug };
     data.userId = initialData ? initialData.userId : user?.id;
-    const sessionUser = await getCurrentUser();
-    const userId = (sessionUser as { id: string }).id;
 
     try {
       if (initialData) {
@@ -92,8 +104,6 @@ export function CrudOperations({ user, initialData, categories }: any) {
     }
   }
 
-  const router = useRouter();
-
   useEffect(() => {
     if (initialData) {
       form.reset(initialData);
@@ -104,7 +114,7 @@ export function CrudOperations({ user, initialData, categories }: any) {
     <Form {...form}>
       <Dialog>
         <DialogTrigger asChild>
-          <Button>
+          <Button onClick={() => handleCreate()}>
             <Plus className='mr-2 h-4 w-4' /> Add Resource
           </Button>
         </DialogTrigger>
