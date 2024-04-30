@@ -28,8 +28,8 @@ export default async function DashboardLayout({
   }
 
   return (
-    <section className='mt-10 flex justify-center md:mt-16 lg:mt-20'>
-      <div className='md:container max-w-6xl mx-auto md:px-6 grid md:grid-cols-[240px_1fr] lg:grid-cols-[290px_1fr] gap-10 items-start py-8'>
+    <section className='flex w-full md:max-w-6xl items-center justify-between mx-auto md:flex-1 mt-10 md:mt-16 lg:mt-20'>
+      <div className='max-w-6xl mx-auto md:px-6 grid md:grid-cols-[240px_1fr] lg:grid-cols-[290px_1fr] gap-10 items-start py-8 '>
         <div className='lg:sticky lg:top-14'>
           <CategoriesSidebar categories={categories} />
         </div>

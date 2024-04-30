@@ -9,22 +9,22 @@ export default function ResourcesListing({ data }: any) {
   const [ogImages, setOgImages] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    setLoading(true);
-    const fetchOgImages = async () => {
-      try {
-        const images: any = await Promise.all(
-          data.map((resource: any) => fetchOGImage(resource.url))
-        );
-        setOgImages(images);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching OG images:", error);
-        setLoading(false);
-      }
-    };
-    fetchOgImages();
-  }, [data]);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   const fetchOgImages = async () => {
+  //     try {
+  //       const images: any = await Promise.all(
+  //         data.map((resource: any) => fetchOGImage(resource.url))
+  //       );
+  //       setOgImages(images);
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.error("Error fetching OG images:", error);
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchOgImages();
+  // }, [data]);
 
   return (
     <main className='grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-3 gap-8'>
@@ -52,7 +52,7 @@ export default function ResourcesListing({ data }: any) {
                 <img
                   alt={`Resources | ${resource.description}`}
                   // title={`${resource.description} | Resources For Software  Developers |Resources For Software  Developers `}
-                  className='rounded-lg w-[16rem] h-[10rem] object-cover object-center aspect-square group-hover:opacity-50 transition-opacity'
+                  className='rounded-lg lg:w-[16rem] w-full h-[10rem] object-cover object-center aspect-square group-hover:opacity-50 transition-opacity'
                   src={ogImage}
                   width={300}
                   height={300}
