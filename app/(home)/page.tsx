@@ -1,10 +1,7 @@
-import { getResources } from "@/actions/resources";
 import Link from "next/link";
 import React from "react";
 
 export default async function Page() {
-  const resources = await getResources();
-
   return (
     <div className='flex flex-col h-screen px-0 lg:px-8 sm:px-6 justify-center items-center'>
       <div className='mx-auto mt-10 flex justify-center md:mt-16 px-12 lg:px-0'>
