@@ -11,13 +11,14 @@ export default function CreateButton({ user }: any) {
 
   function handleCreate() {
     if (userId) {
-      // create operation
+      router.push("/start");
     } else {
       router.push("/login");
+      return null;
     }
   }
   return (
-    <Button onClick={handleCreate}>
+    <Button onClick={() => handleCreate()}>
       <Plus className='mr-2 h-4 w-4 stroke' /> Add Resource
     </Button>
   );
