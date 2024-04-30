@@ -38,7 +38,7 @@ export default async function Page() {
           </h1>
           <p className='mx-auto mt-3 max-w-xl md:text-lg text-gray-500 dark:text-slate-400 sm:mt-5 md:mt-5'>
             The foundation of your next project. An open source collection of
-            quality resources htmlFor developers &amp; designers.
+            quality resources for developers &amp; designers.
           </p>
           <div className='mt-5 sm:mt-8 sm:flex sm:justify-center'>
             <div className='rounded-md shadow'>

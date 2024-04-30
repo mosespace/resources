@@ -43,7 +43,7 @@ export default async function DashboardLayout({
         </div>
         <div className='grid gap-6 md:gap-8'>
           <HeadingSection data={approvedResources} />
-          <main className='flex w-full flex-1 flex-col overflow-hidden'>
+          <main className='flex w-full mx-auto flex-1 flex-col overflow-hidden'>
             {children}
           </main>
         </div>
