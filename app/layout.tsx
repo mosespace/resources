@@ -50,14 +50,14 @@ export const metadata: Metadata = {
       },
     ],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Resources | crafted by @mosespace",
-    description:
-      "A collection of resources for developers, designers, and creators. Find the best tools, libraries, and frameworks to build your next project. 🚀",
-    images: `og-image.png`,
-    creator: "@mosespace",
-  },
+  // twitter: {
+  //   card: "summary_large_image",
+  //   title: "Resources | crafted by @mosespace",
+  //   description:
+  //     "A collection of resources for developers, designers, and creators. Find the best tools, libraries, and frameworks to build your next project. 🚀",
+  //   images: `og-image.png`,
+  //   creator: "@mosespace",
+  // },
   alternates: {
     canonical: `${baseUrl}`,
   },

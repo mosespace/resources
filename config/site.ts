@@ -3,9 +3,9 @@ import { SiteConfig } from "@/types";
 export const siteConfig: SiteConfig = {
   name: "Recourses",
   description:
-    "An open source application built using the new nextjs appRouter, server components and everything new in Next.js 14.",
+    "A collection of resources for developers, designers, and creators. Find the best tools, libraries, and frameworks to build your next project. 🚀",
   url: "https://resources.mosespace.com",
-  ogImage: "https://tx.shadcn.com/og.jpg",
+  ogImage: "https://resources.mosespace.com/og-image.jpg",
   links: {
     twitter: "https://twitter.com/bantu_creative",
     github: "https://github.com/mosespace/resources",
