@@ -43,10 +43,10 @@ export const metadata: Metadata = {
     siteName: "Resources | crafted by @mosespace",
     images: [
       {
-        url: `${baseUrl}/og-image.jpg`,
+        url: `${baseUrl}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: "Resources | crafted by @mosespace",
+        alt: "Resources | crafted by @mosespace - Open Graph Image",
       },
     ],
   },
@@ -55,8 +55,11 @@ export const metadata: Metadata = {
     title: "Resources | crafted by @mosespace",
     description:
       "A collection of resources for developers, designers, and creators. Find the best tools, libraries, and frameworks to build your next project. 🚀",
-    images: `og-image.jpg`,
+    images: `og-image.png`,
     creator: "@mosespace",
+  },
+  alternates: {
+    canonical: `${baseUrl}`,
   },
   icons: {
     icon: "/favicon.ico",

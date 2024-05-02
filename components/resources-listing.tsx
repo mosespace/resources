@@ -54,8 +54,8 @@ export default function ResourcesListing({ data }: any) {
                   // title={`${resource.description} | Resources For Software  Developers |Resources For Software  Developers `}
                   className='rounded-lg lg:w-[16rem] w-full h-[10rem] object-cover object-center aspect-square group-hover:opacity-50 transition-opacity'
                   src={ogImage}
-                  width={300}
-                  height={300}
+                  width={100}
+                  height={100}
                 />
                 <div className='flex-1 py-4'>
                   <h3 className='font-semibold flex space-x-5 items-center justify-between tracking-tight'>
