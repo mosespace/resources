@@ -1,3 +1,4 @@
+import { fetchOGImage } from "@/actions/images";
 import { getResources } from "@/actions/resources";
 import { getCategories } from "@/actions/categories";
 import ResourcesListing from "@/components/resources-listing";
@@ -24,9 +25,17 @@ export default async function page({ params: { slug } }: any) {
     );
   }
 
-  // Step 3: Output the filtered category and resources
-  // console.log(slug);
-  // console.log("Filtered Category:", filteredCategory);
-  // console.log("Filtered Resources:", filteredResources);
-  return <ResourcesListing data={filteredResources} categories={categories} />;
+  // Fetching OG images for approved filteredResources
+  const urls = filteredResources.map((resource: any) => resource.url);
+  let ogImages: any = [];
+
+  try {
+    ogImages = await Promise.all(urls?.map((url: string) => fetchOGImage(url)));
+  } catch (error) {
+    console.error("Error fetching OG images:", error);
+  }
+
+  return (
+    <ResourcesListing data={filteredResources} initialOgImages={ogImages} />
+  );
 }

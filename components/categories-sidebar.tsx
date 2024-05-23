@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import {
   AccordionTrigger,
@@ -6,7 +7,6 @@ import {
   AccordionItem,
   Accordion,
 } from "@/components/ui/accordion";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -127,38 +127,61 @@ export default function CategoriesSidebar({ categories }: any) {
 
   const visibleCategories = showAllCategories
     ? categories
-    : categories.slice(0, 8);
+    : categories?.slice(0, 8);
 
   const path = usePathname();
   const router = useRouter();
+
+  const our_apps = [
+    {
+      id: "1452",
+      name: "Desishub Docs",
+      path: "https://desishub-docs.vercel.app",
+      short_description: " All in One Developer's Handbook",
+    },
+    {
+      id: "1453",
+      name: "Inventory System",
+      path: "https://desishub-docs.vercel.app",
+      short_description: " A system for your business",
+    },
+  ];
   return (
     <div className='flex flex-col gap-4'>
-      <Accordion className='w-full' collapsible type='single'>
-        <AccordionItem value='time-of-day'>
+      <Accordion
+        className='w-full'
+        collapsible
+        type='single'
+        defaultValue='applications-we-build'
+      >
+        <AccordionItem value='applications-we-build'>
           <AccordionTrigger className='text-base font-semibold'>
-            Last Updated
+            We also created
           </AccordionTrigger>
           <AccordionContent>
             <div className='grid gap-2'>
-              <Label className='flex items-center gap-2 font-normal'>
-                <Checkbox id='time-morning' />
-                One(1) week back
-                {"\n                            "}
-              </Label>
-              <Label className='flex items-center gap-2 font-normal'>
-                <Checkbox id='time-afternoon' />
-                One(1) month back
-                {"\n                            "}
-              </Label>
-              <Label className='flex items-center gap-2 font-normal'>
-                <Checkbox id='time-evening' />
-                Two(2) months back
-                {"\n                            "}
-              </Label>
+              {our_apps.map((app) => {
+                return (
+                  <Link
+                    key={app.id}
+                    className='cursor-pointer'
+                    href={app.path}
+                    target='_blank'
+                  >
+                    <Label className='cursor-pointer flex items-center gap-2 font-normal'>
+                      {/* <Checkbox id={app.id} />
+                       */}
+                      <SquareArrowOutUpRight className='size-4' />
+                      {app.name}
+                      {"\n"}
+                    </Label>
+                  </Link>
+                );
+              })}
             </div>
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value='duration'>
+        {/* <AccordionItem value='duration'>
           <AccordionTrigger className='text-base font-semibold'>
             Orther
           </AccordionTrigger>
@@ -182,7 +205,7 @@ export default function CategoriesSidebar({ categories }: any) {
               </Label>
             </div>
           </AccordionContent>
-        </AccordionItem>
+        </AccordionItem> */}
       </Accordion>
 
       {/* categories */}

@@ -1,40 +1,54 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { fetchOGImage } from "@/actions/images";
-import { SquareArrowOutUpRight } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { SquareArrowOutUpRight } from "lucide-react";
 
-export default function ResourcesListing({ data }: any) {
-  const [ogImages, setOgImages] = useState([]);
+export default function ResourcesListing({
+  data,
+  initialOgImages,
+}: {
+  data: any;
+  initialOgImages: any;
+}) {
+  const [ogImages, setOgImages] = useState<any[]>(initialOgImages || []);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-    const fetchOgImages = async () => {
-      try {
-        const images: any = await Promise.all(
-          data.map((resource: any) => fetchOGImage(resource.url))
-        );
-        setOgImages(images);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching OG images:", error);
-        setLoading(false);
-      }
-    };
-    fetchOgImages();
-  }, [data]);
+    if (!initialOgImages) {
+      setLoading(true);
+      const fetchOgImages = async () => {
+        try {
+          const response = await fetch("/api/og-images", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              urls: data.map((resource: any) => resource.url),
+            }),
+          });
+          const result = await response.json();
+          setOgImages(result.images);
+          setLoading(false);
+        } catch (error) {
+          console.error("Error fetching OG images:", error);
+          setLoading(false);
+        }
+      };
+      fetchOgImages();
+    }
+  }, [data, initialOgImages]);
 
   return (
     <main className='grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-3 gap-8'>
       {loading ? (
-        data?.map((_: any, index: any) => (
+        data?.slice(0, 6).map((_: any, index: any) => (
           <div key={index} className='relative group animate-pulse'>
             <div className='rounded-lg lg:w-[15rem] w-full h-[10rem] bg-gray-200'></div>
             <div className='flex-1 py-1'>
               <div className='h-6 bg-gray-200 rounded lg:w-[15rem] w-full my-4'></div>
-              <div className='inline-flex items-center rounded px-2.5 py-0.5 text-xs font-normal opacity-100 h-6 bg-gray-200  w-1/2'></div>
+              <div className='inline-flex items-center rounded px-2.5 py-0.5 text-xs font-normal opacity-100 h-6 bg-gray-200 w-1/2'></div>
             </div>
           </div>
         ))
@@ -51,7 +65,6 @@ export default function ResourcesListing({ data }: any) {
               >
                 <img
                   alt={`Resources | ${resource.description}`}
-                  // title={`${resource.description} | Resources For Software  Developers |Resources For Software  Developers `}
                   className='rounded-lg lg:w-[16rem] w-full h-[10rem] object-cover object-center aspect-square group-hover:opacity-50 transition-opacity'
                   src={ogImage}
                   width={100}
