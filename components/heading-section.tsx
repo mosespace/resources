@@ -11,7 +11,7 @@ import { ArrowUpDownIcon } from "lucide-react";
 
 export default function HeadingSection({ data }: any) {
   return (
-    <div className='flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8'>
+    <div className='flex flex-col md:flex-row pb-4 items-start md:items-center gap-4 md:gap-8'>
       <div id='recourses' className='grid gap-1'>
         <h1 className='text-2xl font-bold tracking-tight'>
           All resources packed for you ({data?.length})

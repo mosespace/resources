@@ -15,7 +15,7 @@ export default function NotFound() {
           </p>
           <Link
             className='inline-flex h-10 items-center justify-center rounded-md bg-gray-50 px-4 text-sm font-medium text-gray-950 shadow-sm transition-colors hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-950 focus:ring-offset-2 dark:bg-gray-800 dark:text-gray-50 dark:hover:bg-gray-700 dark:focus:ring-gray-300 dark:focus:ring-offset-gray-950'
-            href='/start'
+            href='/'
           >
             Browse back to resources
           </Link>
@@ -24,43 +24,3 @@ export default function NotFound() {
     </div>
   );
 }
-
-// === styles.css ===
-
-// body {
-//   font-family: var(--font-bricolage_grotesque), sans-serif;
-// }
-
-// h1, h2, h3, h4, h5, h6 {
-//   font-family: var(--font-syne), sans-serif;
-// }
-
-// === layout.jsx ===
-
-// // This is the root layout component for your Next.js app.
-// // Learn more: https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#root-layout-required
-
-// import { Syne } from 'next/font/google'
-// import { Bricolage_Grotesque } from 'next/font/google'
-// import './styles.css'
-
-// const syne = Syne({
-//   subsets: ['latin'],
-//   display: 'swap',
-//   variable: '--font-syne',
-// })
-// const bricolage_grotesque = Bricolage_Grotesque({
-//   subsets: ['latin'],
-//   display: 'swap',
-//   variable: '--font-bricolage_grotesque',
-// })
-
-// export default function Layout({ children }) {
-//   return (
-//     <html lang="en">
-//       <body className={syne.variable + bricolage_grotesque.variable}>
-//         {children}
-//       </body>
-//     </html>
-//   )
-// }

@@ -245,6 +245,7 @@ export default function CategoriesSidebar({ categories }: any) {
       >
         {showAllCategories ? "Show less" : "Show more"}
       </Button>
+
     </div>
   );
 }

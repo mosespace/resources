@@ -12,7 +12,7 @@ export async function getUser(id: any) {
     });
     return user;
   } catch (error: any) {
-    console.log(error);
+    // console.log(error);
     throw error;
   }
 }

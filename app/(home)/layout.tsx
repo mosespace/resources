@@ -11,6 +11,7 @@ import HeadingSection from "@/components/heading-section";
 import CategoriesSidebar from "@/components/categories-sidebar";
 import { UserAccountNav } from "@/components/dashboard/user-account-nav";
 import { CrudOperations } from "@/components/dashboard/crud-operations";
+import Link from "next/link";
 
 interface MarketingLayoutProps {
   children: React.ReactNode;
@@ -60,11 +61,33 @@ export default async function MarketingLayout({
           {/* categories-side-bar */}
           <div className='lg:sticky lg:top-14'>
             <CategoriesSidebar categories={categories} />
+
+            <Link
+              href='https://coding-school-typescript.vercel.app/courses/next'
+              className='relative mt-8 isolate flex flex-col overflow-hidden rounded-2xl px-8 pb-8'
+            >
+              <img
+                src='https://images.unsplash.com/photo-1499856871958-5b9627545d1a'
+                alt='University of Southern California'
+                className='absolute inset-0 h-full w-full object-cover'
+              />
+              <div className='absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40'></div>
+              <h3 className='z-10 mt-3 text-2xl font-bold text-white'>
+                Learn Full-Stack
+              </h3>
+              <div className='z-10 gap-y-1 overflow-hidden text-sm leading-6 text-gray-300'>
+                Development (Next.JS)
+              </div>
+            </Link>
           </div>
 
           <div className='grid gap-6 md:gap-8'>
             {/* advert-button */}
-            <button className='relative group cursor-pointer text-sky-50  overflow-hidden h-14 w-full rounded-md bg-sky-800 p-2 flex justify-center items-center font-extrabold'>
+            <Link
+              href='https://desishub-docs.vercel.app/'
+              target='_blank'
+              className='relative group cursor-pointer text-sky-50  overflow-hidden h-14 w-full rounded-md bg-sky-800 p-2 flex justify-center items-center font-extrabold'
+            >
               <div className='absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-40 h-40 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-900'></div>
               <div className='absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-32 h-32 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-800'></div>
               <div className='absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-24 h-24 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-700'></div>
@@ -76,7 +99,7 @@ export default async function MarketingLayout({
                   All in One Developer's Handbook
                 </span>
               </p>
-            </button>
+            </Link>
 
             <div>
               <Sponsors />
