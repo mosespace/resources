@@ -11,10 +11,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Resource } from "@prisma/client";
 
 interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
   user: any;
-  resources?: any[];
+  resources?: Resource[] | null;
 }
 
 export function UserAccountNav({ user, resources }: UserAccountNavProps) {

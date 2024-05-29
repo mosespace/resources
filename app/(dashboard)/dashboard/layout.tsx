@@ -23,10 +23,13 @@ export default async function DashboardLayout({
   // console.log(user);
   const categories = await getCategories();
 
-  const resources = await getResources();
+  const resourcesData = await getResources();
+  const resources = resourcesData.data;
 
   const userId = user?.id;
-  const dbUser = await getUser(userId);
+  const userData = await getUser(userId);
+  const dbUser = userData.data;
+
   const username = dbUser?.name;
 
   if (!user) {
@@ -45,7 +48,6 @@ export default async function DashboardLayout({
           <MainNav items={dashboardConfig.mainNav} />
           <div className='flex space-x-2'>
             <div className='hidden md:flex space-x-2 items-center'>
-              {/* <SearchCommand /> */}
               <ModeToggle />
               <CrudOperations
                 user={user}

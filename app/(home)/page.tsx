@@ -11,7 +11,7 @@ export default async function page() {
   const resources = await getResources();
 
   // Filter approved resources
-  const approvedResources = resources?.filter(
+  const approvedResources = resources.data?.filter(
     (approved_resource) => approved_resource.isApproved === true
   );
 

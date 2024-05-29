@@ -2,18 +2,22 @@
 
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
+import { createErrorResponse } from "@/utils/errorHandler";
 
-export async function getUser(id: any) {
+export async function getUser(id: string) {
+  if (!id) {
+    return createErrorResponse(400, "Bad Request", "User ID is undefined");
+  }
   try {
     const user = await db.user.findUnique({
       where: {
         id: id,
       },
     });
-    return user;
+    return { status: "success", data: user };
   } catch (error: any) {
-    // console.log(error);
-    throw error;
+    console.error(error);
+    return createErrorResponse(500, "Internal Server Error", error.message);
   }
 }
 
@@ -25,10 +29,10 @@ export async function getUsers() {
         categories: true,
       },
     });
-    return users;
-  } catch (error) {
+    return { status: "success", data: users };
+  } catch (error: any) {
     console.log(error);
-    throw error;
+    return createErrorResponse(500, "Internal Server Error", error.message);
   }
 }
 
@@ -39,14 +43,21 @@ export async function getAllAdmins() {
         role: "ADMIN",
       },
     });
-    return admins;
+    return { status: "success", data: admins };
   } catch (error: any) {
     console.log(error);
-    throw error; // Ensure errors are propagated for proper error handling
+    return createErrorResponse(500, "Internal Server Error", error.message);
   }
 }
 
-export async function updateUser(id: any, data: any) {
+export async function updateUser(id: string, data: any) {
+  if (!id || !data) {
+    return createErrorResponse(
+      400,
+      "Bad Request",
+      "User ID  or Data is undefined"
+    );
+  }
   try {
     // Retrieve the user from the database using both id and userId
     const user = await db.user.findUnique({
@@ -55,7 +66,7 @@ export async function updateUser(id: any, data: any) {
     // console.log(`original user: ${user}`);
     // Check if the user exists
     if (!user) {
-      throw new Error("User not found");
+      return createErrorResponse(404, "Not Found", "Use Not Found");
     }
 
     // If the user matches, proceed with updating the it
@@ -68,9 +79,9 @@ export async function updateUser(id: any, data: any) {
     revalidatePath("/dashboard");
 
     console.log(updateUser);
-    return updateUser;
+    return { status: "success", data: updateUser };
   } catch (error: any) {
     console.error("Error updating user:", error);
-    throw error;
+    return createErrorResponse(500, "Internal Server Error", error.message);
   }
 }

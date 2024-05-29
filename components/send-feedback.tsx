@@ -1,6 +1,5 @@
 "use client";
 
-// import { sendFeedback } from "@/actions/feedback";
 import * as React from "react";
 import {
   Drawer,
@@ -66,6 +65,7 @@ export const SendFeedback = ({ user }: any) => {
 
     setIsOpen(false);
   }
+
   return (
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger asChild>

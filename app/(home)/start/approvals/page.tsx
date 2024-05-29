@@ -13,7 +13,8 @@ export default async function ApproveResource() {
     return notFound();
   }
 
-  const resources = await getResources();
+  const data = await getResources();
+  const resources = data.data;
 
   const filteredResources = resources?.filter(
     (item) => item.isApproved === false

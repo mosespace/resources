@@ -1,17 +1,16 @@
 "use server";
 
 import { db } from "@/lib/db";
-import { revalidatePath } from "next/cache";
 import { parse } from "node-html-parser";
+import { revalidatePath } from "next/cache";
+import { createErrorResponse } from "@/utils/errorHandler";
 
 export async function postResource(data: any) {
-  // console.log(data);
   try {
     if (!data) {
-      throw new Error("Data is undefined");
+      return createErrorResponse(400, "Bad Request", "Data is undefined");
     }
 
-    // Correctly structure the data for creating a new resource with a relation to a user
     const resource = await db.resource.create({
       data: {
         name: data.name,
@@ -29,11 +28,10 @@ export async function postResource(data: any) {
     });
 
     revalidatePath("/");
-    // console.log("The following resource was created:", resource);
-    return resource;
+    return { status: "success", data: resource };
   } catch (error: any) {
-    console.log(error);
-    throw error; // It's generally a good idea to re-throw the error or handle it appropriately
+    console.error(error);
+    return createErrorResponse(500, "Internal Server Error", error.message);
   }
 }
 
@@ -44,110 +42,110 @@ export async function getResources() {
         createdAt: "desc",
       },
     });
-    return resources;
+    return { status: "success", data: resources };
   } catch (error: any) {
-    console.log(error);
+    console.error(error);
+    return createErrorResponse(500, "Internal Server Error", error.message);
   }
 }
 
-export async function findResource(id: any) {
-  // console.log(id);
+export async function findResource(id: string) {
   if (!id) {
-    throw new Error("User ID is undefined");
+    return createErrorResponse(400, "Bad Request", "Resource ID is undefined");
   }
   try {
     const resource = await db.resource.findUnique({
       where: {
-        id: id,
+        id,
       },
       include: {
         user: true,
       },
     });
+
+    if (!resource) {
+      return createErrorResponse(404, "Not Found", "Resource not found");
+    }
+
     revalidatePath("/");
-    return resource;
+    return { status: "success", data: resource };
   } catch (error: any) {
-    console.log(error);
+    console.error(error);
+    return createErrorResponse(500, "Internal Server Error", error.message);
   }
 }
 
-export async function updateResource(id: any, data: any) {
+export async function updateResource(id: string, data: any) {
   try {
-    // Retrieve the resource from the database using both id and userId
     const resource = await db.resource.findUnique({
       where: { id },
     });
 
-    // Check if the resource exists
     if (!resource) {
-      throw new Error("Resource not found");
+      return createErrorResponse(404, "Not Found", "Resource not found");
     }
 
-    // If the resource matches, proceed with updating the it
     const updatedResource = await db.resource.update({
       where: { id },
       data,
     });
 
-    // Perform any necessary post-deletion actions
     revalidatePath("/");
-
-    console.log(updatedResource);
-    return updatedResource;
+    return { status: "success", data: updatedResource };
   } catch (error: any) {
     console.error("Error updating resource:", error);
-    throw error;
+    return createErrorResponse(500, "Internal Server Error", error.message);
   }
 }
 
-export async function deleteResource(id: any, userId: any) {
-  // console.log(id, userId);
+export async function deleteResource(id: string | undefined, userId: string) {
   try {
-    // Retrieve the resource from the database using both id and userId
     const resource = await db.resource.findUnique({
       where: { id },
-      select: { userId: true }, // Only select the userId field
+      select: { userId: true },
     });
 
-    // Check if the resource exists
     if (!resource) {
-      throw new Error("Resource not found");
+      return createErrorResponse(404, "Not Found", "Resource not found");
     }
 
-    // Check if the userId of the resource matches the provided userId
     if (resource.userId !== userId) {
-      throw new Error("Unauthorized deletion attempt");
+      return createErrorResponse(
+        403,
+        "Forbidden",
+        "Unauthorized deletion attempt"
+      );
     }
 
-    // If the userId matches, proceed with deleting the resource
-    const deleteResource = await db.resource.delete({
+    const deletedResource = await db.resource.delete({
       where: { id },
     });
 
-    // Perform any necessary post-deletion actions
     revalidatePath("/");
-
-    // console.log(deleteResource);
-    return deleteResource;
+    return { status: "success", data: deletedResource };
   } catch (error: any) {
     console.error("Error deleting resource:", error);
-    throw error;
+    return createErrorResponse(500, "Internal Server Error", error.message);
   }
 }
 
-export async function fetchOGImage(url: any) {
+export async function fetchOGImage(url: string) {
   try {
     const response = await fetch(url);
     const html = await response.text();
     const root = parse(html);
-    // console.log(root);
     const ogImageElement = root.querySelector('meta[property="og:image"]');
 
     if (ogImageElement) {
-      return ogImageElement.getAttribute("content");
+      return {
+        status: "success",
+        data: ogImageElement.getAttribute("content"),
+      };
+    } else {
+      return createErrorResponse(404, "Not Found", "OG image not found");
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error fetching OG image:", error);
+    return createErrorResponse(500, "Internal Server Error", error.message);
   }
-  return null;
 }

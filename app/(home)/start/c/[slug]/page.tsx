@@ -5,7 +5,8 @@ import ResourcesListing from "@/components/resources-listing";
 
 export default async function page({ params: { slug } }: any) {
   // Step 1: Finding required params to fetch
-  const resources = await getResources();
+  const data = await getResources();
+  const resources = data.data;
   const categories = await getCategories();
 
   // Step 2: Find the category with the matching slug

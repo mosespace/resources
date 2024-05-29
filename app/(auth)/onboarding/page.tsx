@@ -1,13 +1,6 @@
-import { getUser } from "@/actions/users";
-import OnBoarding from "@/components/on-boarding";
-import { getCurrentUser } from "@/lib/authProvider";
 import React from "react";
+import OnBoarding from "@/components/on-boarding";
 
 export default async function page() {
-  const user: any = await getCurrentUser();
-  const userId = user?.id;
-  const dbUser = await getUser(userId);
-  
-
-  return <OnBoarding/>;
+  return <OnBoarding />;
 }

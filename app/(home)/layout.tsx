@@ -7,11 +7,11 @@ import { marketingConfig } from "@/config/marketing";
 import { getCategories } from "@/actions/categories";
 import { ModeToggle } from "@/components/mode-toggle";
 import { SiteFooter } from "@/components/site-footer";
+import { SheetDemo } from "@/components/sheet-on-home";
 import { SendFeedback } from "@/components/send-feedback";
 import CategoriesSidebar from "@/components/categories-sidebar";
 import { CrudOperations } from "@/components/dashboard/crud-operations";
 import { UserAccountNav } from "@/components/dashboard/user-account-nav";
-import { SheetDemo } from "@/components/sheet-on-home";
 
 interface MarketingLayoutProps {
   children: React.ReactNode;
@@ -23,8 +23,12 @@ export default async function MarketingLayout({
   const user: any = await getCurrentUser();
   const isAdmin = user?.role === "ADMIN";
 
-  const resources = await getResources();
+  const data = await getResources();
+  const resources = data.data;
+
   const categories = await getCategories();
+
+  // console.log(resources.data);
 
   // Find the number of notifications to display
   const filteredResources = resources?.filter(
