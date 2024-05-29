@@ -5,7 +5,8 @@ import { getCurrentUser } from "@/lib/authProvider";
 import React from "react";
 
 export default async function page() {
-  const resources = await getResources();
+  const resourcesData = await getResources();
+  const resources = resourcesData.data;
 
   const approvedResources = resources?.filter(
     (approved_resource) => approved_resource.isApproved === true

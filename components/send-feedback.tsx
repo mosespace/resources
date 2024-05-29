@@ -65,6 +65,7 @@ export const SendFeedback = ({ user }: any) => {
 
     setIsOpen(false);
   }
+
   return (
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger asChild>

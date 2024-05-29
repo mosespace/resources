@@ -49,7 +49,7 @@ export async function getResources() {
   }
 }
 
-export async function findResource(id: any) {
+export async function findResource(id: string) {
   if (!id) {
     return createErrorResponse(400, "Bad Request", "Resource ID is undefined");
   }
@@ -75,7 +75,7 @@ export async function findResource(id: any) {
   }
 }
 
-export async function updateResource(id: any, data: any) {
+export async function updateResource(id: string, data: any) {
   try {
     const resource = await db.resource.findUnique({
       where: { id },
@@ -98,7 +98,7 @@ export async function updateResource(id: any, data: any) {
   }
 }
 
-export async function deleteResource(id: any, userId: any) {
+export async function deleteResource(id: string, userId: string) {
   try {
     const resource = await db.resource.findUnique({
       where: { id },
@@ -129,7 +129,7 @@ export async function deleteResource(id: any, userId: any) {
   }
 }
 
-export async function fetchOGImage(url: any) {
+export async function fetchOGImage(url: string) {
   try {
     const response = await fetch(url);
     const html = await response.text();
