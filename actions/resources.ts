@@ -98,7 +98,7 @@ export async function updateResource(id: string, data: any) {
   }
 }
 
-export async function deleteResource(id: string, userId: string) {
+export async function deleteResource(id: string | undefined, userId: string) {
   try {
     const resource = await db.resource.findUnique({
       where: { id },
