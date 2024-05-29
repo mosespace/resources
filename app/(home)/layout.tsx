@@ -1,17 +1,17 @@
+import Link from "next/link";
 import Sponsors from "@/components/sponsors";
 import { MainNav } from "@/components/main-nav";
 import { getResources } from "@/actions/resources";
 import { getCurrentUser } from "@/lib/authProvider";
 import { marketingConfig } from "@/config/marketing";
 import { getCategories } from "@/actions/categories";
-import { SiteFooter } from "@/components/site-footer";
 import { ModeToggle } from "@/components/mode-toggle";
+import { SiteFooter } from "@/components/site-footer";
 import { SendFeedback } from "@/components/send-feedback";
-import HeadingSection from "@/components/heading-section";
 import CategoriesSidebar from "@/components/categories-sidebar";
-import { UserAccountNav } from "@/components/dashboard/user-account-nav";
 import { CrudOperations } from "@/components/dashboard/crud-operations";
-import Link from "next/link";
+import { UserAccountNav } from "@/components/dashboard/user-account-nav";
+import { SheetDemo } from "@/components/sheet-on-home";
 
 interface MarketingLayoutProps {
   children: React.ReactNode;
@@ -21,9 +21,15 @@ export default async function MarketingLayout({
   children,
 }: MarketingLayoutProps) {
   const user: any = await getCurrentUser();
+  const isAdmin = user?.role === "ADMIN";
 
   const resources = await getResources();
   const categories = await getCategories();
+
+  // Find the number of notifications to display
+  const filteredResources = resources?.filter(
+    (item) => item.isApproved === false
+  );
 
   return (
     <div className='flex min-h-screen flex-col'>
@@ -32,15 +38,18 @@ export default async function MarketingLayout({
           <div>
             <MainNav items={marketingConfig.mainNav} />
           </div>
-          <nav className='flex space-x-2 items-center'>
+          <nav className='flex space-x-4 items-center'>
             <div className='hidden md:block'>
               <ModeToggle />
             </div>
+            {isAdmin && <SheetDemo filteredResources={filteredResources} />}
+
             <CrudOperations
               user={user}
               initialData=''
               categories={categories}
             />
+
             {user && (
               <UserAccountNav
                 user={{

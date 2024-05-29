@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { parse } from "node-html-parser";
 
 export async function postResource(data: any) {
+  // console.log(data);
   try {
     if (!data) {
       throw new Error("Data is undefined");
@@ -17,6 +18,7 @@ export async function postResource(data: any) {
         description: data.description,
         url: data.url,
         slug: data.slug,
+        isApproved: data.isApproved,
         category: {
           connect: { id: data.category },
         },
@@ -26,7 +28,7 @@ export async function postResource(data: any) {
       },
     });
 
-    revalidatePath("/dashboard");
+    revalidatePath("/");
     // console.log("The following resource was created:", resource);
     return resource;
   } catch (error: any) {
@@ -62,7 +64,7 @@ export async function findResource(id: any) {
         user: true,
       },
     });
-    revalidatePath("/dashboard");
+    revalidatePath("/");
     return resource;
   } catch (error: any) {
     console.log(error);
@@ -88,7 +90,7 @@ export async function updateResource(id: any, data: any) {
     });
 
     // Perform any necessary post-deletion actions
-    revalidatePath("/dashboard");
+    revalidatePath("/");
 
     console.log(updatedResource);
     return updatedResource;
@@ -123,7 +125,7 @@ export async function deleteResource(id: any, userId: any) {
     });
 
     // Perform any necessary post-deletion actions
-    revalidatePath("/dashboard");
+    revalidatePath("/");
 
     // console.log(deleteResource);
     return deleteResource;

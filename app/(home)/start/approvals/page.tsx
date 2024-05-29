@@ -6,7 +6,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 
-export default async function page() {
+export default async function ApproveResource() {
   const user: any = await getCurrentUser();
   const isAdmin = user?.role === "ADMIN";
   if (!isAdmin) {

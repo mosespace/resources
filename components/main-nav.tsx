@@ -1,16 +1,14 @@
 "use client";
 
-import * as React from "react";
 import Link from "next/link";
-import { useSelectedLayoutSegment } from "next/navigation";
-
-import { siteConfig } from "@/config/site";
+import * as React from "react";
 import { cn } from "@/lib/utils";
+import { Menu } from "lucide-react";
+import { MainNavItem } from "@/types";
+import { siteConfig } from "@/config/site";
 import { Icons } from "@/components/icons";
 import { MobileNav } from "@/components/mobile-nav";
-import { MainNavItem } from "@/types";
-import { DashboardNav } from "./dashboard/nav";
-import { Menu } from "lucide-react";
+import { useSelectedLayoutSegment } from "next/navigation";
 
 interface MainNavProps {
   items?: MainNavItem[];
