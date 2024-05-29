@@ -15,6 +15,7 @@ export const FormSchema = z.object({
   description: z.string().min(20, {
     message: "Description must be at least 20 characters long.",
   }),
+  isApproved: z.boolean().default(false).optional(),
 });
 
 export const taskSchema = z.object({

@@ -34,11 +34,10 @@ import { Loader, Plus } from "lucide-react";
 import { getCurrentUser } from "@/lib/authProvider";
 import { generateSlug } from "@/lib/generateSlug";
 
-
-
 export function CrudOperations({ user, initialData, categories }: any) {
   // console.log(categories);
   const userId = user?.id;
+  // console.log(user);
   const router = useRouter();
 
   function handleCreate() {
@@ -60,6 +59,7 @@ export function CrudOperations({ user, initialData, categories }: any) {
       category: "",
       userId: user?.id,
       slug: "",
+      isApproved: false, // default value for isApproved
     },
   });
 
@@ -72,6 +72,12 @@ export function CrudOperations({ user, initialData, categories }: any) {
     const slug = generateSlug(data.name);
     const updatedData = { ...data, slug };
     data.userId = initialData ? initialData.userId : user?.id;
+
+    if (user?.role === "ADMIN") {
+      updatedData.isApproved = true;
+    }
+
+    console.log(updatedData);
 
     try {
       if (initialData) {

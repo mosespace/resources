@@ -16,7 +16,7 @@ export default async function LoginPage() {
   const user = await getCurrentUser();
   // console.log(user);
   if (user) {
-    return redirect("/start");
+    return redirect("/");
   }
   return (
     <div className='container flex h-screen w-screen flex-col items-center justify-center'>

@@ -1,9 +1,9 @@
 "use client";
 
+import React from "react";
 import Link from "next/link";
-import { User } from "next-auth";
 import { signOut } from "next-auth/react";
-
+import { UserAvatar } from "./user-avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,8 +11,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { UserAvatar } from "./user-avatar";
-import React from "react";
 
 interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
   user: any;
@@ -20,18 +18,6 @@ interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export function UserAccountNav({ user, resources }: UserAccountNavProps) {
-  const [notificationCount, setNotificationCount] = React.useState<any>(0);
-  const isAdmin = user?.role === "ADMIN";
-
-  // Calculate the number of notifications
-  React.useEffect(() => {
-    if (isAdmin) {
-      const count = resources?.filter(
-        (item) => item.isApproved === false
-      ).length;
-      setNotificationCount(count);
-    }
-  }, [isAdmin]);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -53,27 +39,13 @@ export function UserAccountNav({ user, resources }: UserAccountNavProps) {
         </div>
         <DropdownMenuSeparator />
 
-        {isAdmin && (
-          <DropdownMenuItem asChild>
-            <Link href='/start/approvals' className='cursor-pointer'>
-              Approvals&nbsp;
-              <span className='bg-amber-600 px-4 py-1'>
-                {notificationCount}
-              </span>
-            </Link>
-          </DropdownMenuItem>
-        )}
-
-        <DropdownMenuItem asChild>
-          <Link href='/dashboard'>Dashboard</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
+        {/* <DropdownMenuItem asChild>
           <Link href='/dashboard/billing'>Billing</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
+        </DropdownMenuItem> */}
+        {/* <DropdownMenuItem asChild>
           <Link href='/dashboard/settings'>Settings</Link>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
+        </DropdownMenuItem> */}
+        {/* <DropdownMenuSeparator /> */}
         <DropdownMenuItem
           className='cursor-pointer'
           onSelect={(event) => {
@@ -83,7 +55,7 @@ export function UserAccountNav({ user, resources }: UserAccountNavProps) {
             });
           }}
         >
-          Sign out
+          Sign Out
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

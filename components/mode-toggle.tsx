@@ -17,7 +17,7 @@ export function ModeToggle() {
         className={`rounded-full  `}
         size='icon'
       >
-        <MoonStar className='h-4 w-4' />
+        <MoonStar className='size-4' />
       </Button>
       <Button
         onClick={() => setTheme("light")}
@@ -25,7 +25,7 @@ export function ModeToggle() {
         className={`rounded-full  `}
         size='icon'
       >
-        <Sun className='h-4 w-4' />
+        <Sun className='size-4' />
       </Button>
       <Button
         onClick={() => setTheme("system")}
@@ -33,7 +33,7 @@ export function ModeToggle() {
         className={`rounded-full  `}
         size='icon'
       >
-        <Monitor className='h-4 w-4' />
+        <Monitor className='size-4' />
       </Button>
     </div>
   );

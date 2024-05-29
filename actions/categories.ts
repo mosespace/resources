@@ -43,7 +43,7 @@ export async function findCategory(id: any) {
         user: true,
       },
     });
-    revalidatePath("/start");
+    revalidatePath("/");
     return category;
   } catch (error: any) {
     console.log(error);
@@ -75,7 +75,7 @@ export async function updateCategory(id: any, data: any, userId: any) {
     });
 
     // Perform any necessary post-deletion actions
-    revalidatePath("/start");
+    revalidatePath("/");
 
     // console.log(updatedCategory);
     return updatedCategory;
@@ -104,7 +104,7 @@ export async function deleteCategory(id: any) {
     });
 
     // Perform any necessary category-deletion actions
-    revalidatePath("/start");
+    revalidatePath("/");
 
     // console.log(deletedCategory);
     return deletedCategory;
