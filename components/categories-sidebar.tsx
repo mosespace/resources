@@ -212,7 +212,7 @@ export default function CategoriesSidebar({ categories }: any) {
       <div className='grid gap-1'>
         <h3 className='font-semibold flex justify-between items-center'>
           All Categories
-          <button onClick={() => router.push("/start")}>
+          <button onClick={() => router.push("/")}>
             <RefreshCw className='w-4 h-4' />
           </button>
         </h3>
@@ -245,7 +245,6 @@ export default function CategoriesSidebar({ categories }: any) {
       >
         {showAllCategories ? "Show less" : "Show more"}
       </Button>
-
     </div>
   );
 }
