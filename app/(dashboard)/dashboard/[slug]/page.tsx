@@ -6,9 +6,10 @@ import React from "react";
 
 export default async function page({ params: { slug } }: any) {
   // Step 1: Finding required params to fetch
-  const resources = await getResources();
+  const data = await getResources();
   const categories = await getCategories();
 
+  const resources = data.data;
   // Step 2: Find the category with the matching slug
   const filteredCategory = categories?.find(
     (category) => category.slug === slug
